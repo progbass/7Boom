@@ -1,0 +1,562 @@
+body.single #main_container{
+	background: #dedede;
+}
+section#single{
+	background: #fff;
+
+	/*------ ARTICLE --------*/
+	article{
+		border-bottom: solid 1px #000;
+		padding: 0 $margin-mobile-sides;
+		margin: 0 auto 1.5em;
+		max-width: 32em;
+		display: flex;
+		flex-flow: column nowrap;	
+		padding-top: 1em;
+		padding-bottom: 1em;	
+	}
+
+	/*------ FULLPAGE BANNER --------*/
+	.banner_holder.fullpage{
+		display: none;
+		background: #dedede
+	}
+
+
+
+
+	/*=============================
+	TITLE / TAGS CONTAINER
+	=============================*/
+	.title_holder{
+		position: relative;
+
+		/*------ TITLE --------*/
+		h2{
+			color: #000;
+			text-transform: none;
+			line-height: 1.1;
+			@extend .typl8-beta;
+		}
+
+		/*------ TAGS LIST --------*/
+		ul.tags{
+			position: relative;
+			list-style: none;
+			margin: 0 0 1em; padding: 0;
+
+			// ITEM
+			li{
+				display: inline-block;
+				margin-right: .75em;
+
+				a{
+					color: $color_shades;
+					text-transform: uppercase;
+					font-style: italic;
+				}
+			}
+		}
+	}
+
+
+
+
+	/*=============================
+	ARTICLE CONTENT
+	=============================*/
+	.article_wrapper{
+		position: relative;
+		
+		/*------ SUBTITLE --------*/
+		h3{
+			color: #808285;
+			text-transform: none;
+			font-style: italic;
+			font-weight: normal;
+			line-height: 1.1;
+			margin-bottom: .65em;
+			@extend .typl8-delta;
+		}
+
+
+		/*------ AUTHOR / META --------*/
+		.meta{
+			font-size: .8125em;
+			
+			// AUTHOR INFO
+			.author{
+				padding: .5em .75em;
+				margin-bottom: 10px;
+				background: $color_main;
+				text-transform: uppercase;
+				
+				// Links
+				a{
+					color: #fff;
+					text-decoration: none;
+					text-transform: none;
+					font-style: italic;
+
+					&.link{
+						float: right
+					}
+				}
+			}
+
+
+			// DATE
+			.date{
+				color: #000;
+				font-style: italic;
+				float: right;
+			}
+		}
+
+
+
+		/*------ SOCIAL SHARE --------*/
+		.social_holder{
+			position: relative;
+			margin-bottom: 10px;
+
+			ul{
+				position: relative;
+				list-style: none;
+				margin: 0; padding: 0;
+
+				// ITEM
+				li{
+					position: relative;
+					display: inline-block;
+
+					a{
+						padding: .5em;
+						font-size: .912em;
+						color: #fff;
+						text-decoration: none;
+						transition: background-color .18s;
+
+						&.facebook{
+							background-color: #3b5699;
+
+							&:hover{
+								background-color: lighten(#3b5699, 5%);
+							}
+						}
+						&.twitter{
+							background-color: #54a9f0;
+
+							&:hover{
+								background-color: lighten(#54a9f0, 5%);
+							}
+						}
+					}
+				}
+			}
+		}
+
+
+
+		/*------ ARTICLE CONTENT --------*/
+		.content_holder{
+			position: relative;
+			color: #000;
+
+			.cover{
+				position: relative;
+				margin-bottom: 1em;
+			}
+
+			a{
+				color: #31b6bf !important;
+				transition: color .18s;
+				font-weight: 900;
+
+				&:hover{
+					color: $color_shades !important;
+				}
+			}
+
+			img{
+				@include responsive-image();
+			}
+
+			.image_wrapper{
+				position: relative;
+				width: 100%;
+				max-width: 620px;
+				margin: 0 auto;
+				padding: 1.5em 0;
+			}
+
+			iframe.instagram-media{
+				width: 100% !important;
+				max-width: 420px !important;
+				margin: auto !important;
+			}
+
+
+			.video_container{
+				@include responsive-container(56.2060%);
+				width: 100%;
+				max-width: 600px;
+				margin: 0 auto 1.5em;
+				position: relative;
+
+				iframe, object, embed{
+					position: absolute;
+					width: 100%; height: 100%;
+					top: 0; left: 0;
+				}
+			}
+
+			.wp-caption{
+				display: none;
+				width: 100%;
+			}
+
+
+			//BLOCKQUOTE
+			blockquote{
+				position: relative;
+				//width: 65%;
+				margin: 0 auto 1em;
+				padding: 0;
+
+				//@extend .typl8-beta;
+				@include typl8-typescale(25, $typl8-font-base, $typl8-typescale-unit);
+				color: #000;
+				font-style: italic;
+				font-weight: 300;
+				line-height: 1.5;
+				text-align: left;
+
+				a{
+					font-size: .75em;
+					font-weight: normal;
+				}
+
+				&:before{
+					content: '';
+					display: block;
+					position: relative;
+					margin-bottom: 10px;
+					width: 50px;
+					height: 10px;
+					background-color: $color_shades;
+				}
+
+				@media screen and (min-width: $bp_tablet){
+					@include typl8-typescale(36, $typl8-font-base, $typl8-typescale-unit);
+					line-height: 1.25;
+				}
+			}
+
+			// TITLE
+			h4.note{
+				color: #000;
+				@extend .typl8-zeta;
+				margin-bottom: 0;
+				font-style: italic;
+			}
+
+			////////
+			p.footer{
+				color: #6d6e71;
+				font-weight: normal;
+				@include typl8-typescale(17, $typl8-font-base, $typl8-typescale-unit);		
+			}
+			p.note_text{
+				color: #000;
+				font-weight: 300;
+				font-style: italic;
+				@include typl8-typescale(16, $typl8-font-base, $typl8-typescale-unit);		
+
+				a{
+					color: #000;
+					transition: color .18;
+					text-decoration: underline;
+					font-weight: normal;
+
+					&:hover{
+						color: $color_shades;
+					}
+				}
+			}
+
+			// LIST
+			ul.styled_list{
+				margin: 0; padding: 0;
+				list-style: none;
+				
+				// ITEM
+				li{
+					a{
+						color: #000;
+						font-weight: 300;
+						font-style: italic;
+						transition: color .18;
+
+						&:hover{
+							color: $color_shades;
+						}
+					}
+				}
+			}
+
+
+
+			/*------ RELATED CONTENT --------*/
+			.related{
+				border-bottom: solid 1px $color_secondary;
+				border-top: solid 1px $color_secondary;
+				margin-bottom: 1.25em;
+				padding-bottom: 1em;
+
+				// Title
+				&:before{
+					content: 'TE PUEDE INTERESAR';
+					position: relative;
+					display: inline-block;
+					
+					background: $color_main;
+					padding: .3em .65em;
+					margin-bottom: .5em;
+					font-size: .875em;
+					color: #a6b0bd;
+					font-weight: bold;
+				}
+
+
+				// Link
+				a{
+					display: block;
+					padding: 0 .5em;
+					color: #8f2043;
+					font-size: 1.12em;
+					line-height: 1.32;
+					text-decoration: none;
+				}
+			}
+			
+		}		
+	}
+
+
+
+
+
+
+	/*=============================
+	SIDEBAR
+	=============================*/
+	aside{
+		position: relative;
+
+		& > div{
+			margin-bottom: 1.5em;
+		}
+
+		
+		/*------ BANNER HOLDER --------*/
+		.banner_holder{
+			margin-left: -$margin-mobile-sides;
+			margin-right: -$margin-mobile-sides;
+			background: #dedede
+		}
+
+
+
+		/*------ RELATED :: MAIN LIST --------*/
+		.related{
+			border-bottom: solid 1px $color_secondary;
+			border-top: solid 1px $color_secondary;
+			margin-bottom: 1.25em;
+			padding-bottom: 1em;
+
+			// Title
+			h4{
+				display: inline-block;
+				background: $color_main;
+				padding: .5em;
+				margin-bottom: .875em;
+				@extend .typl8-zeta;
+				color: #a6b0bd;
+			}
+
+			> ul{
+				@extend .mainList;
+
+				li{
+					width: 100% !important;
+					margin-bottom: $margin-mobile-sides;
+				}
+			}
+			
+
+			@media screen and  (max-width: $bp_desktopSmall - 1px ){
+				> ul{
+					margin: 0; padding: 0;
+					list-style: none;
+
+					li{
+						margin-bottom: 1em;
+
+						.image_holder{
+							display: none;
+						}
+
+
+						.cat_display{
+							display: none;
+						}
+
+						.info_holder{
+							position: relative;
+							padding: 0;
+
+							&:before{
+								display: none;
+							}
+
+							// Link
+							h3{
+								margin-bottom: 0;
+								text-transform: none;
+								font-size: 1.12em;
+								font-weight: normal;
+								line-height: 1.32;
+								text-align: left;
+								
+								a{
+									display: block;
+									color: #8f2043;
+									text-decoration: none;
+								}
+							}
+
+							.meta{
+								display: none;
+							}
+
+							a.more_btn{
+								display: none;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+
+
+
+
+
+	@media screen and ( min-width: $bp_tablet){
+		/*------ ARTICLE --------*/
+		article{
+			max-width: 40em;
+		}
+	}
+
+	@media screen and ( min-width: $bp_desktopSmall){
+		/*------ ARTICLE --------*/
+		article{
+			max-width: none;
+			//justify-content: space-between;	
+			flex-flow: row wrap;
+		}
+
+		/*------ FULLPAGE BANNER --------*/
+		.banner_holder.fullpage{
+			display: block;
+			width: calc(100% + #{$margin-mobile-sides*2});
+			margin: 0 #{-$margin-mobile-sides};
+		}
+
+
+		/*=============================
+		TITLE / TAGS CONTAINER
+		=============================*/
+		.title_holder{
+			width: 100%;
+			margin-bottom: .5em;
+			padding-top: 20px;
+
+			h2{
+				@include typl8-typescale(54, $typl8-font-base, $typl8-typescale-unit);
+				//font-size: 3.325em;
+				line-height: 1;
+				margin-bottom: .25rem;
+				//padding-right: .5em;
+			}
+		}
+
+
+		/*=============================
+		ARTICLE CONTENT
+		=============================*/
+		.article_wrapper{
+			flex: 1;
+			padding-right: 20px;
+	
+			h3{
+				@include typl8-typescale(33, $typl8-font-base, $typl8-typescale-unit);
+				font-weight: 400;
+			}
+
+			.meta{
+				margin-bottom: 7px;
+
+				.author{
+					width: auto;
+					display: inline-block;
+
+					a.link{
+						float: none;
+						margin-left: 15px;
+					}
+				}
+
+				.date{
+					float: none;
+					display: inline-block;
+					padding: .5em .925em;
+					margin-bottom: 10px;
+					background: $color_main;
+					color: #fff;
+				}
+			}
+
+			.social_holder{
+				margin-bottom: 17px;
+			}
+
+			.content_holder{
+				blockquote{
+					width: 75%;
+					margin-left: 0; margin-right: 0;
+				}
+			}
+		}
+
+
+		/*=============================
+		SIDEBAR
+		=============================*/
+		aside{
+			width: calc(300px + 20px);
+
+			.banner_holder{
+				margin-left: auto;
+				margin-right: auto;
+			}
+
+		}
+	}
+}
+
+

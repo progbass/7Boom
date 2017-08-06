@@ -1,0 +1,22 @@
+/*!
+	Theme Name: Coolture
+	Author: Israel Díaz @progbass
+	Version: 1.0
+	Author URI: http://icreate.io
+	Theme URI: http://coolture.com
+	Tags: dark,fluid-layout,responsive-layout
+	Description: Coolture Website
+	License: GNU General Public License v2 or later
+	License URI: http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+@import "vendor/normalize";
+@import "typography";
+@import "helpers";
+@import "variables";
+@import "base";
+@import "header";
+@import "home";
+//@import "single";
+//@import "category";
+@import "footer";

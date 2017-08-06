@@ -1,0 +1,966 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"tran",
+				"transform: "
+			],
+			[
+				"feat",
+				"featured_posts"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"conten",
+				"content: "
+			],
+			[
+				"pu",
+				"pubads"
+			],
+			[
+				"inlin",
+				"inlineAdContainer"
+			],
+			[
+				"ajax",
+				"ajax_container"
+			],
+			[
+				"container",
+				"_container"
+			],
+			[
+				"re",
+				"relative"
+			],
+			[
+				"align",
+				"align-self: "
+			],
+			[
+				"max",
+				"max-width: "
+			],
+			[
+				"quer",
+				"query_vars"
+			],
+			[
+				"load",
+				"loading_enabled"
+			],
+			[
+				"loa",
+				"loading_enabled"
+			],
+			[
+				"margin-",
+				"margin-mobile-sides"
+			],
+			[
+				"inn",
+				"inner_posts"
+			],
+			[
+				"trans",
+				"transform-origin: "
+			],
+			[
+				"fle",
+				"flex-flow: "
+			],
+			[
+				"translae",
+				"translateX"
+			],
+			[
+				"flex",
+				"flex-flow: "
+			],
+			[
+				"padd",
+				"padding: "
+			],
+			[
+				"back",
+				"background: "
+			],
+			[
+				"main",
+				"main_js"
+			],
+			[
+				"color",
+				"color_main"
+			],
+			[
+				"add",
+				"addEventListener"
+			],
+			[
+				"header",
+				"header_fixed"
+			],
+			[
+				"sco",
+				"scrollPosition"
+			],
+			[
+				"bordrr",
+				"border-radius: "
+			],
+			[
+				"conte",
+				"content: "
+			],
+			[
+				"flex-",
+				"flex-flow: "
+			],
+			[
+				"margin",
+				"margin-mobile-sides"
+			],
+			[
+				"flox",
+				"flex-flow: "
+			],
+			[
+				"border",
+				"border-bottom: "
+			],
+			[
+				"marg",
+				"margin-bottom: "
+			],
+			[
+				"repeat",
+				"repeat-x"
+			],
+			[
+				"responsive",
+				"responsive-container"
+			],
+			[
+				"responsive-",
+				"responsive-image"
+			],
+			[
+				"lsisst",
+				"list-style-position: "
+			],
+			[
+				"backsi",
+				"background-size: "
+			],
+			[
+				"backro",
+				"background: "
+			],
+			[
+				"ali",
+				"align-items: "
+			],
+			[
+				"felx-",
+				"flex-flow: "
+			],
+			[
+				"content",
+				"justify-content: "
+			],
+			[
+				"word",
+				"word-wrap: "
+			],
+			[
+				"no",
+				"nowrap"
+			],
+			[
+				"wrp",
+				"word-wrap: "
+			],
+			[
+				"testS",
+				"testSubscription"
+			],
+			[
+				"translate",
+				"translateX"
+			],
+			[
+				"bp",
+				"bp_tablet"
+			],
+			[
+				"transl",
+				"translateX"
+			],
+			[
+				"transo",
+				"transform: "
+			],
+			[
+				"max-",
+				"max-width: "
+			],
+			[
+				"text",
+				"text-transform: "
+			],
+			[
+				"transla",
+				"translateY"
+			],
+			[
+				"wor",
+				"word-wrap: "
+			],
+			[
+				"images",
+				"images_path"
+			],
+			[
+				"Scroll",
+				"ScrollToTop"
+			],
+			[
+				"exp",
+				"experiencia"
+			],
+			[
+				"set",
+				"setLocation"
+			],
+			[
+				"scrollTo",
+				"scrollToSection"
+			],
+			[
+				"nav",
+				"nav_prev"
+			],
+			[
+				"po",
+				"pointer"
+			],
+			[
+				"slide",
+				"slides"
+			],
+			[
+				"slides",
+				"slides_elements"
+			],
+			[
+				"getElement",
+				"getElementsByTagName"
+			],
+			[
+				"getEleme",
+				"getElementsByClassName"
+			],
+			[
+				"z",
+				"z-index: "
+			],
+			[
+				"ri",
+				"right"
+			],
+			[
+				"the_pos",
+				"the_post_thumbnail"
+			],
+			[
+				"end",
+				"endif"
+			],
+			[
+				"font_",
+				"font_content"
+			],
+			[
+				"liss",
+				"list-style: "
+			],
+			[
+				"wid",
+				"width: "
+			],
+			[
+				"infografi",
+				"infografia_id"
+			],
+			[
+				"in",
+				"infografia_id"
+			],
+			[
+				"proje",
+				"projectData"
+			],
+			[
+				"le",
+				"length"
+			],
+			[
+				"galler",
+				"gallery_item"
+			],
+			[
+				"eleme",
+				"element_type"
+			],
+			[
+				"work",
+				"work_list"
+			],
+			[
+				"nod",
+				"nodeModules"
+			],
+			[
+				"paddin",
+				"padding: "
+			],
+			[
+				"rating",
+				"ratingList"
+			],
+			[
+				"page",
+				"pageBottom"
+			],
+			[
+				"showDe",
+				"showDetail"
+			],
+			[
+				"ease",
+				"ease-in-out"
+			],
+			[
+				"skills",
+				"skills_arr"
+			],
+			[
+				"class",
+				"className"
+			],
+			[
+				"icon",
+				"icon_holder"
+			],
+			[
+				"padding",
+				"padding-bottom"
+			],
+			[
+				"textal",
+				"text-align"
+			],
+			[
+				"ser",
+				"sans-serif"
+			],
+			[
+				"borde",
+				"border-bottom: "
+			],
+			[
+				"listst",
+				"list-style: "
+			],
+			[
+				"news",
+				"news_scrollbar_toggle"
+			],
+			[
+				"fonts",
+				"font-style: "
+			],
+			[
+				"visib",
+				"visible"
+			],
+			[
+				"it",
+				"italic"
+			],
+			[
+				"sr",
+				"scrollTop"
+			],
+			[
+				"paddin-",
+				"padding-top: "
+			],
+			[
+				"bac",
+				"background: "
+			],
+			[
+				"lightn",
+				"lighten\tSass-function"
+			],
+			[
+				"inl",
+				"inline"
+			],
+			[
+				"padding-",
+				"padding-bottom: "
+			],
+			[
+				"wrapp",
+				"wrapper_container\t main.scss"
+			],
+			[
+				"bloc",
+				"block"
+			],
+			[
+				"mar",
+				"margin-bottom: "
+			],
+			[
+				"min-",
+				"min-width: "
+			],
+			[
+				"ease-",
+				"ease-out"
+			],
+			[
+				"pad",
+				"padding: "
+			],
+			[
+				"paddi",
+				"padding-right: "
+			],
+			[
+				"u",
+				"uppercase"
+			],
+			[
+				"tranfr",
+				"transform"
+			],
+			[
+				"boerri",
+				"border-right: "
+			],
+			[
+				"au",
+				"auto"
+			],
+			[
+				"te",
+				"text-transform: "
+			],
+			[
+				"leasing",
+				"leasing_2clipTop1_rect"
+			],
+			[
+				"inline-",
+				"inline-block"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"inner",
+				"innerWidth"
+			],
+			[
+				"ch",
+				"checkpoint"
+			],
+			[
+				"check",
+				"checkpoint2"
+			],
+			[
+				"pos",
+				"pos_x"
+			],
+			[
+				"scroll",
+				"scroll_position"
+			],
+			[
+				"reu",
+				"require"
+			],
+			[
+				"window",
+				"window_top_position"
+			],
+			[
+				"texta",
+				"text-align: "
+			],
+			[
+				"ma",
+				"margin-bottom: "
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 252.0,
+		"last_filter": "material",
+		"selected_items":
+		[
+			[
+				"material",
+				"Material Theme: Advanced configuration"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"pa",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"package control",
+				"Package Control: Upgrade/Overwrite All Packages"
+			]
+		],
+		"width": 575.0
+	},
+	"console":
+	{
+		"height": 153.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/progbass/Sites/7boom/desarrollo/wp-content/themes/7boom"
+	],
+	"file_history":
+	[
+		"/Users/progbass/Library/Caches/Cleanup At Startup/Transmit/BCD8B923-EDD5-4717-9172-742881C0F360/functions.php",
+		"/Users/progbass/Library/Caches/Cleanup At Startup/Transmit/5F05BC7A-72B0-4C2E-8C62-82367AC95B8D/home3.php",
+		"/Users/progbass/Library/Caches/Cleanup At Startup/Transmit/4FFFF61C-F21E-4815-AB6F-495CACAD4F1D/home.php",
+		"/Users/progbass/Library/Caches/Cleanup At Startup/Transmit/FA98D528-E00C-46B8-9E9B-DF72DEABE257/index.php",
+		"/Volumes/LaCie/SITES/Unefon/desarrollo/lifeboxset.html",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/scss/_base.scss",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/scss/_home.scss",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/scss/_variables.scss",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/scss/_category.scss",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/scss/_single.scss",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/archive.php",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/header.php",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/scss/_header.scss",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/loop.php",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/loop-single.php",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/single.php",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/footer.php",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/search.php",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/grunt/gruntfile.js",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/scss/style.scss",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/js/scripts.js",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/loop-banner.php",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/front-page.php",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/searchform.php",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/functions.php",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/loop-category.php",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/style.css",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/scss/wp-editor-style.scss",
+		"/Users/progbass/Sites/Philip-Morris/game2/dist/index.html",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/loop-latest.php",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/loop-featured.php",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/grunt/node_modules/typeplate-starter-kit/dist/scss/_typeplate-vars.scss",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/grunt/node_modules/typeplate-starter-kit/dist/scss/_typeplate-mixins.scss",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/css/wp-editor-style.css",
+		"/Users/progbass/Sites/Personalista/published_210217/wp-content/themes/personalista/functions.php",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/scss/_footer.scss",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/index.php",
+		"/Users/progbass/Sites/Coolture/desarrollo/wordpress/wp-content/themes/coolture/grunt/package.json",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/js/main.js",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/js/about.js",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/scss/_variables.scss",
+		"/Users/progbass/Sites/Piliado/desarrollo/webpack.config.js",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/scss/_services.scss",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/scss/_header.scss",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/index.html",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/scss/_team.scss",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/scss/_contact.scss",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/scss/_clients.scss",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/scss/_about.scss",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/scss/styles.scss",
+		"/Volumes/MAXIMUS USB/Web Design/Philip-Morris/Phillip Morris/juego_01/slide3_icon1.svg",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/scss/_footer.scss",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/js/clients.js",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/js/header.js",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/js/services.js",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/js/DOMHelpers.js",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/js/EventBroadcaster.js",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/js/EventSubscriber.js",
+		"/Users/progbass/Sites/Piliado/desarrollo/package.json",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/js/bar.js",
+		"/Users/progbass/Sites/Piliado/desarrollo/node_modules/typeplate-starter-kit/scss/_typeplate-vars.scss",
+		"/Users/progbass/Sites/Piliado/desarrollo/node_modules/typeplate-starter-kit/scss/_typeplate-mixins.scss",
+		"/Users/progbass/Sites/Piliado/desarrollo/node_modules/typeplate-starter-kit/scss/_typeplate-styles.scss",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/scss/_fonts.scss",
+		"/Users/progbass/Sites/Piliado/resources/Entregables_Piliado/Fonts/baskerville_webfont/stylesheet.css",
+		"/Users/progbass/Sites/Piliado/resources/Entregables_Piliado/Fonts/biko_webfont/stylesheet.css",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/img/logo_piliado_header.svg",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/img/menu_icon.svg",
+		"/Users/progbass/Sites/Piliado/desarrollo/.babelrc",
+		"/Users/progbass/Sites/Piliado/desarrollo/app/js/app.js",
+		"/Users/progbass/Sites/Ads/Absolut/desarrollo/banner/app/images/slide4_header.svg",
+		"/Users/progbass/Sites/Ads/Absolut/desarrollo/banner/app/images/absolutLime_logo.svg",
+		"/Users/progbass/Sites/Ads/Absolut/desarrollo/banner/app/images/absolut_logo.svg",
+		"/Users/progbass/Sites/Ads/Absolut/desarrollo/css/main.css",
+		"/Users/progbass/Sites/Ads/Absolut/desarrollo/banner/app/images/slide2_header.svg",
+		"/Users/progbass/Sites/Ads/Absolut/desarrollo/banner/app/images/slide1_header.svg",
+		"/Users/progbass/Sites/Ads/Absolut/desarrollo/index.html",
+		"/Users/progbass/Sites/Ads/Absolut/desarrollo/banner/dist/images/slide1_header.svg",
+		"/Users/progbass/Sites/Ads/Absolut/desarrollo/banner/terminal.glue",
+		"/Users/progbass/Sites/Ads/Absolut/desarrollo/demo.html",
+		"/private/var/folders/0z/jtmq68rx2s3c_558jxk5tkbw0000gn/T/fz3temp-2/wp-config.php",
+		"/private/var/folders/0z/jtmq68rx2s3c_558jxk5tkbw0000gn/T/fz3temp-2/index.php",
+		"/Users/progbass/Sites/MariaElenaSalinas/wp-config.php",
+		"/Users/progbass/Sites/Ads/unefon/desarrollo/banner/package.json",
+		"/Users/progbass/Sites/HeyHeyHello/wp-content/themes/heyheyhello/template-parts/banners/banners-sidebar.php",
+		"/Users/progbass/Sites/HeyHeyHello/wp-content/themes/heyheyhello/assets/css/partials/_variables.scss",
+		"/Users/progbass/Sites/HeyHeyHello/wp-content/themes/heyheyhello/assets/css/partials/_modules.scss",
+		"/Users/progbass/Sites/HeyHeyHello/wp-content/themes/heyheyhello/gulpfile.js",
+		"/Users/progbass/Sites/HeyHeyHello/wp-content/themes/heyheyhello/functions.php",
+		"/Users/progbass/Sites/HeyHeyHello/wp-content/themes/heyheyhello/style.css.map",
+		"/Users/progbass/Sites/HeyHeyHello/wp-content/themes/style 2.css",
+		"/Users/progbass/Sites/HeyHeyHello/wp-content/themes/style.min 2.css",
+		"/Users/progbass/Library/Caches/Cleanup At Startup/Transmit/2FC7EC6D-0B59-4472-9179-6DBCB1E153DF/single.php",
+		"/Users/progbass/Sites/HeyHeyHello/wp-content/themes/heyheyhello/index.php",
+		"/Users/progbass/Library/Caches/Cleanup At Startup/Transmit/68D1CEDC-A466-4FCC-B4E3-9CDC2FBB2DB8/index.php",
+		"/Users/progbass/Downloads/simple/HTML5_InPage_Clicktags_300x250.html",
+		"/Users/progbass/Sites/Ads/unefon/desarrollo/demo.html",
+		"/Users/progbass/Sites/HeyHeyHello/page-dfp-tests.php",
+		"/Users/progbass/Sites/Personalista/published_210217/wp-content/themes/personalista/single-channel_boost.php",
+		"/Users/progbass/Sites/Personalista/published_210217/wp-content/themes/personalista/microsites/boost/package.json",
+		"/Users/progbass/Sites/HeyHeyHello/wp-content/themes/heyheyhello/page-dfp-tests.php",
+		"/Users/progbass/Sites/HeyHeyHello/wp-content/themes/heyheyhello/sidebar-single.php",
+		"/Users/progbass/Sites/HeyHeyHello/wp-content/themes/heyheyhello/yarpp-template-example.php",
+		"/Users/progbass/Sites/HeyHeyHello/wp-content/themes/heyheyhello/sidebar.php",
+		"/Users/progbass/Sites/HeyHeyHello/wp-content/themes/heyheyhello/header.php",
+		"/Users/progbass/Sites/HeyHeyHello/template/gulpfile.js",
+		"/Users/progbass/Library/Caches/Cleanup At Startup/Transmit/48EA3841-720C-454A-8D59-23FA6B5977DC/package.json",
+		"/Users/progbass/Sites/Personalista/published_210217/wp-content/themes/personalista/archive-channel_boost.php",
+		"/Users/progbass/Sites/Personalista/published_210217/wp-content/themes/personalista/archive.php",
+		"/Users/progbass/Sites/Personalista/published_210217/wp-content/themes/personalista/microsites/boost/boost_menu.php",
+		"/Users/progbass/Sites/Iamin/desarrollo/app/projects.json",
+		"/Users/progbass/Sites/Iamin/desarrollo/app/css/_footer.scss",
+		"/Users/progbass/Sites/Iamin/desarrollo/app/js/Work.js",
+		"/Users/progbass/Sites/Iamin/desarrollo/app/css/_work.scss",
+		"/Users/progbass/Sites/Iamin/desarrollo/build/app.js",
+		"/Users/progbass/Sites/Iamin/desarrollo/webpack.common.js",
+		"/Users/progbass/Sites/Iamin/desarrollo/webpack.prod.js",
+		"/Users/progbass/Sites/Iamin/desarrollo/app/js/Header.js",
+		"/Users/progbass/Sites/Iamin/desarrollo/app/app.js",
+		"/Users/progbass/Sites/Iamin/desarrollo/package.json",
+		"/Users/progbass/Sites/Iamin/desarrollo/webpack.config.js",
+		"/Users/progbass/Sites/Iamin/desarrollo/app/css/styles.scss",
+		"/Users/progbass/Sites/Iamin/desarrollo/build/index.html",
+		"/Users/progbass/Sites/Iamin/desarrollo/app/index.html",
+		"/Users/progbass/Sites/Iamin/desarrollo/app/js/About.js",
+		"/Users/progbass/Sites/Iamin/desarrollo/app/js/Footer.js",
+		"/Users/progbass/Sites/Iamin/desarrollo/index.html",
+		"/Users/progbass/Sites/Iamin/desarrollo/webpack.dev.js"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"waves",
+			"color",
+			"color1",
+			"exlude_post_id",
+			"featured_args",
+			"featured_posts",
+			"loadSortedContent",
+			"sort_pagination_page",
+			"actual_page",
+			"getBlogSectionName",
+			"search",
+			"WP_Query",
+			"320px",
+			".image_wrapper",
+			"largeSlot",
+			"slotName",
+			"SlotName",
+			"slotName",
+			"single",
+			"lastAdContainer",
+			"inlineAdContainer",
+			"_main",
+			"base_re",
+			"main",
+			"COO_Home_300x250_BTF2_Mobi",
+			"slot",
+			"_container",
+			"ajax_container",
+			"createAdUnitContainer",
+			"slotDiv",
+			"found_index",
+			"new_posts",
+			"response_html",
+			"head",
+			"foot",
+			"http://brutalcontent.com/coolture",
+			"http://www.localhost:8888/Coolture/desarrollo/wordpress",
+			"http://coolture.digitallpost.com.mx",
+			"http://www.localhost:8888/Coolture/desarrollo/wordpress",
+			"http://www.newurl",
+			"http://www.oldurl",
+			"query_vars",
+			"menu-max-height",
+			"aside",
+			"related",
+			"RELATED",
+			"related",
+			"resizeImages",
+			"height: 33",
+			"$posts",
+			"posts",
+			"counter",
+			"latestModule_visible_count",
+			"latestModule_max_visible",
+			"WP_Query",
+			"wp_query",
+			"pagination_main",
+			"$posts->",
+			"ajax_pagination_main",
+			"ajax_pagination",
+			"template_ajax_pagination",
+			"wp_ajax_nopriv_ajax_pagination",
+			"word-wrap",
+			"103",
+			"latest",
+			"more_btn",
+			"$id",
+			"resizeImages",
+			"adjustImages",
+			"configImages",
+			"addImagesListeners",
+			"resizeImages",
+			"formatThumbnails",
+			"resizeImages",
+			"resize",
+			"formatThumbnails",
+			"resizeImages",
+			"formatThumbnails",
+			"0",
+			"jpg",
+			"%menuMobile",
+			"%submenu",
+			" %",
+			"menuMobile",
+			"%menuMobile",
+			"%menu",
+			"%submenu",
+			"%;\n",
+			"%submenu",
+			"%menu",
+			"menu",
+			"submenu",
+			"submenuList",
+			"submenu",
+			"loadSortedContent",
+			"#{",
+			"exlude_post_ids",
+			"wp_query",
+			"chronological",
+			"$test",
+			"autor",
+			"@extend .typl8",
+			"ty",
+			"t",
+			"line-",
+			"typl8",
+			"sides",
+			"font-",
+			"auto",
+			"formatThumbnails",
+			"console",
+			"alert",
+			"scroll",
+			"loadSortedConten",
+			"default-scripts",
+			"ajax",
+			"secci",
+			"document.getElementsByTagName('header')[0]",
+			"getElementById",
+			"console",
+			"15px",
+			"setRatio",
+			"image",
+			"target",
+			"aside",
+			"menu",
+			"target",
+			"banneR_"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 38.0
+	},
+	"input":
+	{
+		"height": 35.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.CSS Extended Completions":
+	{
+		"height": 0.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 228.0
+	},
+	"pinned_build_system": "",
+	"project": "7boom.sublime-project",
+	"replace":
+	{
+		"height": 72.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 206.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

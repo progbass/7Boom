@@ -1,0 +1,5 @@
+node_modules
+dist
+grunt
+bower_component
+doc
