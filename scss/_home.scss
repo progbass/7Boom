@@ -7,6 +7,13 @@ $category-list: (
 );
 
 
+
+@mixin grayscale($amount: 100%){
+    -webkit-filter: grayscale($amount);
+    filter: grayscale($amount);
+    filter: gray;
+}
+
 %common-list{
     margin: 0; padding: 0;
     position: relative;
@@ -15,6 +22,14 @@ $category-list: (
     li{
         position: relative;
         overflow: hidden;
+        transition: 200ms;
+        
+        &:hover{
+            .photo_container{
+                img{
+                }
+            }
+        }
 
         .photo_container{
             position: relative;
@@ -34,7 +49,10 @@ $category-list: (
                 top: 0; left: 0;
                 @include responsive-image();
                 @include center-content(50%, 50%);
+                @include grayscale();
             }
+            
+            
         }
 
 
@@ -439,7 +457,16 @@ section#featured_articles{
     li{
         position: relative;
         overflow: hidden;
+        
+        ///////////////////
+        // Hover State
+        &:hover{
+            .photo_container{
+            }
+        }
 
+        ////////////////////
+        // Color ID
         @each $category, $color in $category-list{
             &.category-#{$category}{
                 .info_container .meta .category{
@@ -448,6 +475,9 @@ section#featured_articles{
             }
         }
 
+        
+        ////////////////////
+        // PHOTO CONTAINER
         .photo_container{
             position: relative;
             width: 100%;
@@ -472,6 +502,7 @@ section#featured_articles{
                 position: absolute;
                 @include center-content(50%, 50%)
                 @include responsive-image();
+                @include grayscale();
             }
         }
 
