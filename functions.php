@@ -134,7 +134,7 @@ add_filter( 'the_excerpt', 'custom_excerpt_length', 999 );
 function boom_enqueue_scripts() {
 	wp_enqueue_style( 'boom-styles', get_stylesheet_uri(), array(), '1.0' );
 	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'main_js', get_template_directory_uri() . '/js/scripts.js', array(), '1.0', true );
+	wp_enqueue_script( 'main_js', get_template_directory_uri() . '/js/scripts.pack.js', array(), '1.0', true );
 
 
 	// LOCALIZE SCRIPT (References for Ajax Functions)
@@ -353,17 +353,19 @@ add_action( 'save_post', 'sm_meta_save' );
 /////////////////////////////////////////////////////////////
 // AJAX CALLS
 /////////////////////////////////////////////////////////////
-/*function template_ajax_pagination_home() {
+function template_ajax_pagination_home() {
 
 	// CONSTRUCT QUERY
-    $query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
-    $query_vars['paged'] = $_POST['page'];
+    $query_vars = json_decode( stripslashes( $_GET['query_vars'] ), true );
+    //$query_vars['paged'] = $_GET['page'];
+    $query_vars['category_name'] = $_GET['category'];
     $query_vars['post_status'] = 'publish';
 
     // MAKE QUERY
     $posts = new WP_Query( $query_vars );
     $GLOBALS['wp_query'] = $posts;
     
+    print_r($posts);
 
     // FORM RETURN STRING FROM SEARCH RESULTS
     if( $posts->have_posts() ) {
@@ -374,11 +376,6 @@ add_action( 'save_post', 'sm_meta_save' );
 
 			// 
     		get_template_part( 'loop', get_post_format() );
-
-			//
-			if($counter % 6 == 0 ){ 
-    			get_template_part( 'loop-banner', get_post_format() );
-			}
 
 			//
 			$counter++;
@@ -393,12 +390,38 @@ add_action( 'wp_ajax_nopriv_ajax_pagination_home', 'template_ajax_pagination_hom
 add_action( 'wp_ajax_ajax_pagination_home', 'template_ajax_pagination_home' );
 
 
+function template_ajax_pagination_single() {
+	global $post;
+
+	// CONSTRUCT QUERY
+    $query_vars = json_decode( stripslashes( $_GET['query_vars'] ), true );
+    $query_vars['paged'] = $_GET['page'];
+    $query_vars['post_status'] = 'publish';
+    
+
+    // MAKE QUERY
+    $posts = new WP_Query( $query_vars );
+    $GLOBALS['wp_query'] = $posts;
+    
+
+    // FORM RETURN STRING FROM SEARCH RESULTS
+    if( $posts->have_posts() ) {
+		get_template_part( 'loop-single', get_post_format() );
+    }
+    
+
+	//finish
+    die();
+}
+add_action( 'wp_ajax_nopriv_ajax_pagination_single', 'template_ajax_pagination_single' );
+add_action( 'wp_ajax_ajax_pagination_single', 'template_ajax_pagination_single' );
 
 
+/*
 function template_ajax_pagination_category() {
 
 	// CONSTRUCT QUERY
-    $query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
+    $query_vars = json_decode( stripslashes( $_GET['query_vars'] ), true );
     $query_vars['paged'] = $_POST['page'];
     $query_vars['post_status'] = 'publish';
     
@@ -433,37 +456,7 @@ function template_ajax_pagination_category() {
 }
 add_action( 'wp_ajax_nopriv_ajax_pagination_category', 'template_ajax_pagination_category' );
 add_action( 'wp_ajax_ajax_pagination_category', 'template_ajax_pagination_category' );
-
-
-
-
-function template_ajax_pagination_single() {
-	global $post;
-
-	// CONSTRUCT QUERY
-    $query_vars = json_decode( stripslashes( $_POST['query_vars'] ), true );
-    $query_vars['paged'] = $_POST['page'];
-    $query_vars['post_status'] = 'publish';
-    
-
-    // MAKE QUERY
-    $posts = new WP_Query( $query_vars );
-    $GLOBALS['wp_query'] = $posts;
-    
-
-    // FORM RETURN STRING FROM SEARCH RESULTS
-    if( $posts->have_posts() ) {
-		get_template_part( 'loop-single', get_post_format() );
-    }
-    
-
-	//finish
-    die();
-}
-add_action( 'wp_ajax_nopriv_ajax_pagination_single', 'template_ajax_pagination_single' );
-add_action( 'wp_ajax_ajax_pagination_single', 'template_ajax_pagination_single' );*/
-
-
+*/
 
 
 

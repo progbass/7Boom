@@ -1,14 +1,16 @@
+@charset "UTF-8";
 /*!
-	Theme Name: Coolture
-	Author: Israel Díaz @progbass
+	Theme Name: 7boom
+	Author: Israel Diaz @progbass
 	Version: 1.0
 	Author URI: http://icreate.io
-	Theme URI: http://coolture.com
-	Tags: dark,fluid-layout,responsive-layout
-	Description: Coolture Website
+	Theme URI: http://7boom.mx
+	Tags: responsive-layout
+	Description: 7Boom Mx El espacio donde tú ordenas al mundo como tú quieras.
 	License: GNU General Public License v2 or later
 	License URI: http://www.gnu.org/licenses/gpl-2.0.html
 */
+
 
 @import "vendor/normalize";
 @import "typography";
@@ -17,6 +19,6 @@
 @import "base";
 @import "header";
 @import "home";
-//@import "single";
+@import "single";
 //@import "category";
 @import "footer";

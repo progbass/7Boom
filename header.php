@@ -30,42 +30,45 @@
 
 	<body <?php body_class(); ?>>
 
+
+
 		<!-- MAIN CONTAINER -->
 		<div id="main_container">
+		
+		
+        
+            <!-- HEADER & MAIN NAV -->
+            <header>
+                <div class="logo_container">
+                    <a class="logo" href="<?php echo home_url(); ?>">
+                        <img src="<?php echo bloginfo('template_url'); ?>/images/logo-7boom.svg" alt="<?php bloginfo( 'name' ); ?>"> 
+                    </a>
 
-
-			
-			<!-- HEADER & MAIN NAV -->
-			<header>
-				<div class="logo_container">
-					<a class="logo" href="<?php echo home_url(); ?>">
-				        <img src="<?php echo bloginfo('template_url'); ?>/images/logo-7boom.svg" alt="<?php bloginfo( 'name' ); ?>"> 
-					</a>
-					
-					<ul class="mobile_items">
+                    <ul class="mobile_items">
                         <li class="search">Buscar</li>
                         <li class="menu"></li>
                     </ul>
-				</div>
-				
-				
+                </div>
 
 
-				<?php
-				$nav_menu = wp_nav_menu(
-					array(
-						'container' => 'nav',
-						'container_id' => 'menu_main',
-						'items_wrap' => '<ol>%3$s</ol>',
-						'theme_location' => 'main-menu',
-						'fallback_cb' => '__return_false',
-					)
-				); ?>
 
 
-				<ul class="social_media">
-					<li class="search"><a href="#">Buscar</a></li>
-					<li class="facebook"><a href="#">Facebook</a></li>
-				</ul>
-			</header>
-			<!-- END: HEADER & MAIN NAV -->
+                <?php
+                $nav_menu = wp_nav_menu(
+                    array(
+                        'container' => 'nav',
+                        'container_id' => 'menu_main',
+                        'items_wrap' => '<ol>%3$s</ol>',
+                        'theme_location' => 'main-menu',
+                        'fallback_cb' => '__return_false',
+                    )
+                ); ?>
+
+
+                <ul class="social_media">
+                    <li class="search"><a href="#">Buscar</a></li>
+                    <li class="facebook"><a href="#">Facebook</a></li>
+                </ul>
+            </header>
+            <!-- END: HEADER & MAIN NAV -->
+			

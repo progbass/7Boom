@@ -1,3 +1,7 @@
+const Axios = require('../grunt/node_modules/axios');
+
+
+
 (function(){
     
 	////////////////////////////////////////////////////////
@@ -24,17 +28,20 @@
 		imagesList.forEach( function(item){
             const images = [].slice.call(document.querySelectorAll(item));
 			images.forEach(function(_target){
-                const image = _target.querySelector('img');
-                image.onload = image.resize;
-                image.src = image.src;
-                image.resize();
+                try{
+                    const image = _target.querySelector('img');
+                    image.onload = image.resize;
+                    image.src = image.src;
+                    image.resize();
+                } catch(e) {}
 			});
 		});
 	}
 	let imagesList = [
 		'#featured_articles .photo_container',
         '#latest_articles .article_container .photo_container',
-        'aside .recent-posts ul .photo_container'
+        'aside .related ul .photo_container',
+        '.article_container .latest_posts ul .photo_container'
 	];
 	resizeImages();
     
@@ -48,6 +55,9 @@
         let iterationCount = 0;
         let counter = 0;
         const articleContainer = document.querySelector("#latest_articles .article_container");
+        if(!articleContainer){
+            return false
+        }
         const thumbnails = [].slice.call(articleContainer.querySelectorAll("li"));
         let columnFlag = false;
         
@@ -109,16 +119,164 @@
     
     
     
+    const categories = ['9am-6pm', '6pm-8pm', '8pm-finde'];
+    const menu_main = document.querySelector('#menu_main');
+    menu_main.addEventListener('click', function(e){
+        const button = e.target;
+        
+        //
+        try{
+            let dynamicContent;
+            for(let i=0; i<categories.length; i++){
+                var container_cat = 'menu-'+categories[i];
+                if(button.parentNode.classList.contains(container_cat)){
+                    dynamicContent = true;
+                    break;
+                }
+                
+                dynamicContent = false;
+            }
+            
+            // 
+            if(dynamicContent){
+                e.preventDefault();
+                loadContent(container_cat.substring(5))
+            }
+               
+        } catch (error){}
+    });
     
-    window.addEventListener('resize', function(){
+    
+    
+    
+    
+    
+    /////////////////////////////////////////////////////////////
+	// PAGINATION / VIEW MORE  AJAX 
+	/////////////////////////////////////////////////////////////
+	let loading_content = false;
+	let loading_enabled = true;
+	var sort_pagination_page = base_reference.actual_page;
+	var sort_pagination_total = base_reference.total_pages;
+
+
+	// Buttons
+	function loadContent(_category){
+		sort_pagination_page++;
+        let _section = 'home';
+		let container = document.querySelector('#latest_articles>ul');
+        if( base_reference.section == 'single'){
+            _section = 'single';
+            container = document.querySelector('#single');
+        }
+		loadSortedContent( container, _category, _section );
+
+		return false;
+	};
+
+
+	// Function
+	function loadSortedContent(_container, _category, _section){
+		loading_content = true;
+
+		// Params
+		let ajax_container = _container;
+
+		// Pagination Checker
+		/*if(sort_pagination_page >= sort_pagination_total){
+			sort_pagination_page = sort_pagination_total;
+			_paginator.fadeOut();
+			loading_enabled = false;
+		}
+		
+		// Show Preloader
+		var preloader = $("<li class='preloader'></li>");
+		preloader.hide();
+		ajax_container.append( preloader );		
+		preloader.fadeIn();*/
+        
+        Axios.get(base_reference.ajaxurl, {
+          
+			params: {
+				action: 'ajax_pagination_'+base_reference.section,
+				query_vars: base_reference.query_vars,
+				page: sort_pagination_page,
+                category: _category
+			}
+        })
+        .then(function (response) {
+            loading_content = false;
+
+            // Show Paginator
+            /*if(sort_pagination_total > 1 && sort_pagination_page < sort_pagination_total){
+                _paginator.fadeIn();
+            }
+
+            //remove preloader icon
+            preloader.remove();*/
+
+            // APPEND NEW ITEMS TO LIST
+            var response_html = response.data;
+            if(_section === 'single'){
+                //const parser = 
+                const fragment = new DOMParser().parseFromString(response_html, "text/html").body.firstChild;
+            console.log(fragment)
+                //ajax_container.innerHTML = '´ørale chido';
+                ajax_container.appendChild(fragment);
+            } else {
+                ajax_container.innerHTML = response_html;
+            }
+
+            // Setup Buttons and Image ratios
+            resizeImages();
+            resetLayout([ 2 ], 3);
+            
+            // Add Banner
+            //createAdUnitContainer();
+        })
+        .catch(function (error) {
+            loading_content = false;
+            console.log(error);
+        });
+	}
+    
+    
+    
+    
+    
+    function onScroll(){
+		const scrollPosition = document.body.scrollTop;
+
+		// FIXED MENU 
+		/*if(scrollPosition >= header_init_height ){
+			header.classList.toggle('fixed', true);
+			document.getElementById('main_container').style.paddingTop = header_init_height+'px';
+		} else {
+			header.classList.toggle('fixed', false);
+			document.getElementById('main_container').style.paddingTop = '0px';
+		}*/
+
+		// AJAX CALLS
+       	if(scrollPosition+window.innerHeight >= document.documentElement.offsetHeight){
+       		if( loading_enabled && !loading_content ){
+       			loadContent()
+       		}
+       	}
+	}
+    
+    function onResize(){
         imagesList.forEach( function(item){
             const images = [].slice.call(document.querySelectorAll(item));
 			images.forEach(function(_target){
-                const image = _target.querySelector('img');
-                image.resize();
+                try{
+                    const image = _target.querySelector('img');
+                    image.resize();
+                } catch(e) {}
 			});
 		});
-    })
+    }
+	window.addEventListener('scroll',  onScroll);
+    window.addEventListener('resize', onResize)
 
 
 })();

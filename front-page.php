@@ -7,52 +7,53 @@
  * @since 7boom 1.0
  */
 
-get_header(); ?>
+get_header();
+
+////////////////////////
+$exlude_post_ids = [];
+?>
 
 	<!-- FEATURED CONTENT -->
 	<section id="featured_articles">
 		<div class="layout_container">
             <ul>
-                <li class="cat-9am-6pm">
-                    <div class="photo_container">
-                        <img src="<?php bloginfo('template_url') ?>/images/test1.jpg" alt="Test Image">
-                    </div>
+               
+                <?php
+                $featured_args = array(
+                    'posts_per_page' => 4,
+                    //'meta_key' => 'featuredPost-checkbox',
+                    //'meta_value' => 'yes'
+                );
+                $featured_posts = new WP_Query($featured_args);
+                
+                if ($featured_posts->have_posts()):
+                
+                    while($featured_posts->have_posts()):
+					   $featured_posts->the_post();
+					   array_push($exlude_post_ids, get_the_ID());  ?>
 
-                    <div class="info_container">
-                        <h2>10 lugares increíbles que debes visitar para cambiarte la vida.</h2>
-                        <div class="meta">8PM a 6PM</div>
-                    </div>
-                </li>
-                <li class="cat-6pm-8pm">
-                    <div class="photo_container">
-                        <img src="<?php bloginfo('template_url') ?>/images/test2.jpg" alt="Test Image">
-                    </div>
+                            <li <?php post_class(); ?>>
+                                <div class="photo_container">
+                                    <a href="<?php the_permalink() ?>"><?php the_post_thumbnail(); ?></a>
+                                </div>
 
-                    <div class="info_container">
-                        <h2>¿Es lo nuevo de Radiohead una obra maestra o un disco de descartes?</h2>
-                        <div class="meta">8PM al FINDE</div>
-                    </div>
-                </li>
-                <li class="cat-8pm-finde">
-                    <div class="photo_container">
-                        <img src="<?php bloginfo('template_url') ?>/images/test3.jpg" alt="Test Image">
-                    </div>
+                                <div class="info_container">
+                                    <h2><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h2>
+                                    
+                                    <?php
+                                    $category = get_the_category( $id )[0];
+                                    $category_link = get_category_link( $category->term_id );
+                                    ?>
+                                    <div class="meta"><a href="<?php echo esc_url( $category_link ); ?>"><?php echo $category->name ?></a></div>
+                                </div>
+                            </li>
+                    <?php
+                    endwhile;
 
-                    <div class="info_container">
-                        <h2>Licuados que te ayudarán a bajar de peso sin tener que sacrificarte.</h2>
-                        <div class="meta">9AM a 6PM</div>
-                    </div>
-                </li>
-                <li class="cat-9am-6pm">
-                    <div class="photo_container">
-                        <img src="<?php bloginfo('template_url') ?>/images/test4.jpg" alt="Test Image">
-                    </div>
-
-                    <div class="info_container">
-                        <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                        <div class="meta">6PM a 8PM</div>
-                    </div>
-                </li>
+                    // Restore original Post Data
+                    wp_reset_postdata();
+                                         
+                endif; ?>
             </ul>
         </div>
 	</section>
@@ -79,227 +80,21 @@ get_header(); ?>
     <div class="content_wrapper">
         <section id="latest_articles">
             <ul class="article_container">
-                <li class="cat-9am-6pm">
-                    <div class="photo_container">
-                        <img src="<?php bloginfo('template_url') ?>/images/test2.jpg" alt="Test Image">
-                    </div>
+               <?php
+                if ( have_posts() ) :
 
-                    <div class="info_container">
-                        <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                        <div class="meta">6PM a 8PM</div>
-                    </div>
-                </li>
-                
-                    <li class="cat-6pm-8pm">
-                        <div class="photo_container">
-                            <img src="<?php bloginfo('template_url') ?>/images/test1.jpg" alt="Test Image">
-                        </div>
+                    while ( have_posts() ) : the_post();
 
-                        <div class="info_container">
-                            <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                            <div class="meta">6PM a 8PM</div>
-                        </div>
-                    </li>
-                    
-                       
-                       <li class="cat-8pm-finde">
-                        <div class="photo_container">
-                            <img src="<?php bloginfo('template_url') ?>/images/test3.jpg" alt="Test Image">
-                        </div>
+                        get_template_part( 'loop', get_post_format() );
 
-                        <div class="info_container">
-                            <h2>210 peliculas de cine negro que debes de ver antes de morir.</h2>
-                            <div class="meta">6PM a 8PM</div>
-                        </div>
-                    </li>
-                
-                
-                <li class="cat-9am-6pm">
-                    <div class="photo_container">
-                        <img src="<?php bloginfo('template_url') ?>/images/test2.jpg" alt="Test Image">
-                    </div>
+                    endwhile;
 
-                    <div class="info_container">
-                        <h2>310 peliculas de cine negro que debes de ver antes de morir.</h2>
-                        <div class="meta">6PM a 8PM</div>
-                    </div>
-                </li>
-                <li class="cat-8pm-finde">
-                    <div class="photo_container">
-                        <img src="<?php bloginfo('template_url') ?>/images/test1.jpg" alt="Test Image">
-                    </div>
+                else :
 
-                    <div class="info_container">
-                        <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                        <div class="meta">6PM a 8PM</div>
-                    </div>
-                </li>
-                
-                    <li class="cat-9am-6pm">
-                        <div class="photo_container">
-                            <img src="<?php bloginfo('template_url') ?>/images/test3.jpg" alt="Test Image">
-                        </div>
+                    get_template_part( 'loop', 'empty' );
 
-                        <div class="info_container">
-                            <h2>410 peliculas de cine negro que debes de ver antes de morir.</h2>
-                            <div class="meta">6PM a 8PM</div>
-                        </div>
-                    </li>
-                    <li class="cat-8pm-finde">
-                        <div class="photo_container">
-                            <img src="<?php bloginfo('template_url') ?>/images/test2.jpg" alt="Test Image">
-                        </div>
-
-                        <div class="info_container">
-                            <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                            <div class="meta">6PM a 8PM</div>
-                        </div>
-                    </li>
-                
-                <li class="cat-9am-6pm">
-                    <div class="photo_container">
-                        <img src="<?php bloginfo('template_url') ?>/images/test3.jpg" alt="Test Image">
-                    </div>
-
-                    <div class="info_container">
-                        <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                        <div class="meta">6PM a 8PM</div>
-                    </div>
-                </li>
-                
-                
-                <li class="cat-6pm-8pm">
-                    <div class="photo_container">
-                        <img src="<?php bloginfo('template_url') ?>/images/test1.jpg" alt="Test Image">
-                    </div>
-
-                    <div class="info_container">
-                        <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                        <div class="meta">6PM a 8PM</div>
-                    </div>
-                </li>
-                <li class="cat-8pm-finde">
-                    <div class="photo_container">
-                        <img src="<?php bloginfo('template_url') ?>/images/test2.jpg" alt="Test Image">
-                    </div>
-
-                    <div class="info_container">
-                        <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                        <div class="meta">6PM a 8PM</div>
-                    </div>
-                </li>
-                
-                
-                
-                
-                <li class="cat-9am-6pm">
-                    <div class="photo_container">
-                        <img src="<?php bloginfo('template_url') ?>/images/test2.jpg" alt="Test Image">
-                    </div>
-
-                    <div class="info_container">
-                        <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                        <div class="meta">6PM a 8PM</div>
-                    </div>
-                </li>
-                
-                    <li class="cat-6pm-8pm">
-                        <div class="photo_container">
-                            <img src="<?php bloginfo('template_url') ?>/images/test1.jpg" alt="Test Image">
-                        </div>
-
-                        <div class="info_container">
-                            <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                            <div class="meta">6PM a 8PM</div>
-                        </div>
-                    </li>
-                    <li class="cat-8pm-finde">
-                        <div class="photo_container">
-                            <img src="<?php bloginfo('template_url') ?>/images/test3.jpg" alt="Test Image">
-                        </div>
-
-                        <div class="info_container">
-                            <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                            <div class="meta">6PM a 8PM</div>
-                        </div>
-                    </li>
-                
-                
-                <li class="cat-9am-6pm">
-                    <div class="photo_container">
-                        <img src="<?php bloginfo('template_url') ?>/images/test2.jpg" alt="Test Image">
-                    </div>
-
-                    <div class="info_container">
-                        <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                        <div class="meta">6PM a 8PM</div>
-                    </div>
-                </li>
-                <li class="cat-8pm-finde">
-                    <div class="photo_container">
-                        <img src="<?php bloginfo('template_url') ?>/images/test1.jpg" alt="Test Image">
-                    </div>
-
-                    <div class="info_container">
-                        <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                        <div class="meta">6PM a 8PM</div>
-                    </div>
-                </li>
-                
-                    <li class="cat-9am-6pm">
-                        <div class="photo_container">
-                            <img src="<?php bloginfo('template_url') ?>/images/test3.jpg" alt="Test Image">
-                        </div>
-
-                        <div class="info_container">
-                            <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                            <div class="meta">6PM a 8PM</div>
-                        </div>
-                    </li>
-                    <li class="cat-8pm-finde">
-                        <div class="photo_container">
-                            <img src="<?php bloginfo('template_url') ?>/images/test2.jpg" alt="Test Image">
-                        </div>
-
-                        <div class="info_container">
-                            <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                            <div class="meta">6PM a 8PM</div>
-                        </div>
-                    </li>
-                
-                <li class="cat-9am-6pm">
-                    <div class="photo_container">
-                        <img src="<?php bloginfo('template_url') ?>/images/test3.jpg" alt="Test Image">
-                    </div>
-
-                    <div class="info_container">
-                        <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                        <div class="meta">6PM a 8PM</div>
-                    </div>
-                </li>
-                
-                
-                <li class="cat-6pm-8pm">
-                    <div class="photo_container">
-                        <img src="<?php bloginfo('template_url') ?>/images/test1.jpg" alt="Test Image">
-                    </div>
-
-                    <div class="info_container">
-                        <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                        <div class="meta">6PM a 8PM</div>
-                    </div>
-                </li>
-                <li class="cat-8pm-finde">
-                    <div class="photo_container">
-                        <img src="<?php bloginfo('template_url') ?>/images/test2.jpg" alt="Test Image">
-                    </div>
-
-                    <div class="info_container">
-                        <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                        <div class="meta">6PM a 8PM</div>
-                    </div>
-                </li>
-                
+                endif;
+                ?>
             </ul>
         </section>
 
@@ -309,67 +104,64 @@ get_header(); ?>
                 <h3>Lo &Uacute;ltimo</h3>
 
                 <ul>
-                    <li class="cat-6pm-8pm">
-                        <div class="photo_container">
-                            <img src="<?php bloginfo('template_url') ?>/images/test1.jpg" alt="Test Image">
-                        </div>
+                   <?php
+                    $recent_args = array(
+                        'posts_per_page' => 4,
+                        'post__not_in' => $exlude_post_ids
+                    );
+                    $recent_posts = new WP_Query($recent_args);
+                    
+                    if ( $recent_posts->have_posts() ) :
 
-                        <div class="info_container">
-                            <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                            <div class="meta">
-                                <div class="category">6PM a 8PM</div>
-                                <div class="date">Mayo 1, 2017</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="cat-6pm-8pm">
-                        <div class="photo_container">
-                            <img src="<?php bloginfo('template_url') ?>/images/test2.jpg" alt="Test Image">
-                        </div>
+                        while ( $recent_posts->have_posts() ) :
+                            $recent_posts->the_post();
+                            array_push($exlude_post_ids, get_the_ID()); ?>
+                        
+                            <li <?php post_class(); ?>>
+                                <div class="photo_container">
+                                    <a href="<?php the_permalink() ?>"><?php the_post_thumbnail(); ?></a>
+                                </div>
 
-                        <div class="info_container">
-                            <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                            <div class="meta">
-                                <div class="category">6PM a 8PM</div>
-                                <div class="date">Mayo 1, 2017</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="cat-6pm-8pm">
-                        <div class="photo_container">
-                            <img src="<?php bloginfo('template_url') ?>/images/test3.jpg" alt="Test Image">
-                        </div>
+                                <div class="info_container">
+                                    <h2><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h2>
+                                    
+                                       <?php
+                                        $category = get_the_category( $id )[0];
+                                        $category_link = get_category_link( $category->term_id );
+                                        ?>
+                                       <div class="meta">
+                                        <div class="category"><a href="<?php echo esc_url( $category_link ); ?>"><?php echo $category->name ?></a></div>
+                                        <div class="date"><?php the_time('d F y') ?></div>
+                                    </div>
+                                </div>
+                            </li>
 
-                        <div class="info_container">
-                            <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                            <div class="meta">
-                                <div class="category">6PM a 8PM</div>
-                                <div class="date">Mayo 1, 2017</div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="cat-6pm-8pm">
-                        <div class="photo_container">
-                            <img src="<?php bloginfo('template_url') ?>/images/test4.jpg" alt="Test Image">
-                        </div>
+                        <?php
+                        endwhile;
+				
+                        // Restore original Post Data
+                        wp_reset_postdata();
+                                            
 
-                        <div class="info_container">
-                            <h2>10 peliculas de cine negro que debes de ver antes de morir.</h2>
-                            <div class="meta">
-                                <div class="category">6PM a 8PM</div>
-                                <div class="date">Mayo 1, 2017</div>
-                            </div>
-                        </div>
-                    </li>
+                    else :
+                        get_template_part( 'loop', 'empty' );
+                    endif;
+                    ?>
                 </ul>
             </div>
 
+           
+           
+           
             <div class="module ad_container">
                 <div class="ad_unit">
                     <img src="http://via.placeholder.com/300x250" alt="">
                 </div>
             </div>
 
+           
+           
+           
             <div class="module ad_container desktop">
                 <div class="ad_unit">
                     <img src="http://via.placeholder.com/300x250" alt="">
@@ -383,32 +175,6 @@ get_header(); ?>
             </div>
         </aside>
     </div>
-
-
-	<!-- 
-	<section class="page-content primary" role="main">
-		<?php
-			if ( have_posts() ) :
-
-				while ( have_posts() ) : the_post();
-
-					get_template_part( 'loop', get_post_format() );
-
-				endwhile;
-
-			else :
-
-				get_template_part( 'loop', 'empty' );
-
-			endif;
-		?>
-		<div class="pagination">
-
-			<?php get_template_part( 'template-part', 'pagination' ); ?>
-
-		</div>
-	</section>
- -->
 
 
 <?php get_footer(); ?>

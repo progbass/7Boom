@@ -21,6 +21,12 @@ $category-list: (
             background: darken($color_main, 4%);
             @include responsive-container( percentage(480/360));
             overflow: hidden;
+            
+            a{
+                position: absolute;
+                width: 100%; height: 100%;
+                top: 0; left: 0
+            }
 
             img{
                 position: absolute;
@@ -34,11 +40,9 @@ $category-list: (
 
         .info_container{
             position: absolute;
-            //padding: $
             bottom: 0; left: 0;
             width: 100%;
             height: 27.5%;
-            //padding: 1.25em $mobile-padding .875em ;
 
             h2{
                 @extend .font-epsilon; 
@@ -46,11 +50,16 @@ $category-list: (
                 font-weight: 700;
                 letter-spacing: .01em;
                 width: 100%;
-                //width: calc(100% - #{$mobile-padding*2});
                 margin: .2em auto 0;
                 padding: 0 $mobile-padding;
                 position: absolute;
                 @include center-content(50%, 50%);
+            }
+            
+                
+            a{
+                color: #fff;
+                text-decoration: none;
             }
 
             .meta{
@@ -62,12 +71,12 @@ $category-list: (
                 font-size: .875em;
 	            font-family: $header-font;
                 font-weight: 500;
-                letter-spacing: .04em
+                letter-spacing: .04em;
             }
         }
 
         @each $category, $color in $category-list{
-            &.cat-#{$category}{
+            &.category-#{$category}{
                 .info_container{
                     background-color: rgba($color, .75);
 
@@ -189,6 +198,12 @@ section#featured_articles{
                     height: 100%;
                     &:before{
                         display: none;
+                    }
+                    
+                    a{
+                        position: absolute;
+                        width: 100%; height: 100%;
+                        top: 0;
                     }
                 }
 
@@ -341,8 +356,20 @@ section#featured_articles{
 
                         li{
                             width: 100%;
+                            
+                            a{
+                                color: #fff;
+                                text-decoration: none;
+                            }
+                            
                             .photo_container{
                                 @include responsive-container( percentage(220/420));
+                                
+                                a{
+                                    position: absolute;
+                                    width: 100%; height: 100%;
+                                    top: 0;
+                                }
                             }
                         }
                     }
@@ -398,6 +425,134 @@ section#featured_articles{
 }
 
 
+
+
+
+
+
+
+%recent_posts_list{
+    margin: 0; padding: 0;
+    list-style: none;
+    position: relative;
+
+    li{
+        position: relative;
+        overflow: hidden;
+
+        @each $category, $color in $category-list{
+            &.category-#{$category}{
+                .info_container .meta .category{
+                    background: $color;
+                }
+            }
+        }
+
+        .photo_container{
+            position: relative;
+            width: 100%;
+            @include responsive-container(percentage(175/316));
+
+            &:after{
+                content: '';
+                display: block;
+                position: absolute;
+                width: 100%; height: 100%;
+                top: 0; left: 0;
+                background: rgba($color_main, .7)
+            }
+            
+            a{
+                position: absolute;
+                width: 100%; height: 100%;
+                top: 0; left: 0;
+            }
+
+            img{
+                position: absolute;
+                @include center-content(50%, 50%)
+                @include responsive-image();
+            }
+        }
+
+        .info_container{
+            position: absolute;
+            top: 0;
+            width: 100%; height: 100%;
+            padding: $mobile-padding;
+
+            h2{
+                margin: 0;
+                @extend .font-epsilon;
+            }
+            
+            a{
+                color: #fff;
+                text-decoration: none;
+            }
+
+            .meta{
+                position: absolute;
+                display: flex;
+                flex-flow: row nowrap;
+                width: 100%;
+                bottom: 1em;
+                left: 0;
+                padding: 0;
+
+                > div{
+                    display: inline-block;
+                }
+
+                .category{
+                    width: 55%;
+                    padding-left: $mobile-padding;
+                    text-align: left;
+                    background: rgba($color_main, .8);
+                }
+                .date{
+                    width: 45%;
+                    padding-right: $mobile-padding;
+                    text-align: right
+                }
+            }
+        }
+    }
+
+
+    // MEDIA QUERIES
+    @include mediaQuery(480px) {
+        display: flex;
+        flex-flow: row wrap;
+
+        li{
+            width: 50%;
+            border-bottom: solid 1em $color_main;
+
+            &:last-child{
+                border-bottom: none;
+            }
+
+            .photo_container{
+                @include responsive-container( percentage(600/620));
+            }
+        }
+    }
+
+    @include mediaQuery($bp_small) {
+        display: flex;
+        flex-flow: row wrap;
+
+        li{
+            width: 50%;
+            .photo_container{
+                @include responsive-container( percentage(320/520));
+            }
+        }
+    }
+}
+
+
 aside{
     
     /*=============================
@@ -413,114 +568,7 @@ aside{
         }
         
         ul{
-            margin: 0; padding: 0;
-            list-style: none;
-            position: relative;
-            
-            li{
-                position: relative;
-                overflow: hidden;
-                
-                @each $category, $color in $category-list{
-                    &.cat-#{$category}{
-                        .info_container .meta .category{
-                            background: $color;
-                        }
-                    }
-                }
-                
-                .photo_container{
-                    position: relative;
-                    width: 100%;
-                    @include responsive-container(percentage(175/316));
-                
-                    &:after{
-                        content: '';
-                        display: block;
-                        position: absolute;
-                        width: 100%; height: 100%;
-                        top: 0; left: 0;
-                        background: rgba($color_main, .7)
-                    }
-                    
-                    img{
-                        position: absolute;
-                        width: 100%; height: 100%;
-                        top: 0; left: 0;
-                        @include responsive-image();
-                    }
-                }
-                
-                .info_container{
-                    position: absolute;
-                    top: 0;
-                    width: 100%; height: 100%;
-                    padding: $mobile-padding;
-                    
-                    h2{
-                        margin: 0;
-                        @extend .font-epsilon;
-                    }
-                    
-                    .meta{
-                        position: absolute;
-                        display: flex;
-                        flex-flow: row nowrap;
-                        width: 100%;
-                        bottom: 1em;
-                        left: 0;
-                        padding: 0;
-                        
-                        > div{
-                            display: inline-block;
-                        }
-                        
-                        .category{
-                            width: 55%;
-                            padding-left: $mobile-padding;
-                            text-align: left;
-                            background: rgba($color_main, .8);
-                        }
-                        .date{
-                            width: 45%;
-                            padding-right: $mobile-padding;
-                            text-align: right
-                        }
-                    }
-                }
-            }
-            
-            
-            // MEDIA QUERIES
-            @include mediaQuery(480px) {
-                display: flex;
-                flex-flow: row wrap;
-
-                li{
-                    width: 50%;
-                    border-bottom: solid 1em $color_main;
-                    
-                    &:last-child{
-                        border-bottom: none;
-                    }
-                    
-                    .photo_container{
-                        @include responsive-container( percentage(600/620));
-                    }
-                }
-            }
-
-            @include mediaQuery($bp_small) {
-                display: flex;
-                flex-flow: row wrap;
-
-                li{
-                    width: 50%;
-                    .photo_container{
-                        @include responsive-container( percentage(320/520));
-                    }
-                }
-            }
+            @extend %recent_posts_list;
         }
     }
     
