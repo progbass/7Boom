@@ -8,79 +8,68 @@
  */
 
 get_header(); ?>
+    <?php
+    $cat = get_term_by('name', single_cat_title('',false), 'category'); 
+    ?>
+                
+    <section id="category" class="category-<?php echo $cat->slug; ?>" role="main">
+	
+        <div class="content_wrapper">    
+            <?php
+            if ( have_posts() ): ?>
 
-	<section class="page-content primary" role="main"><?php
+                <h1 class="archive-title">
+                    <?php
+                        if ( is_category() ):
+                            printf( single_cat_title( '', false ) );
 
-		if ( have_posts() ) : ?>
+                        elseif ( is_tag() ):
+                            printf( single_tag_title( '', false ) );
 
-			<h1 class="archive-title">
-				<?php
-					if ( is_category() ):
-						printf( __( 'Category Archives: %s', '7boom' ), single_cat_title( '', false ) );
+                        elseif ( is_tax() ):
+                            $term     = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
+                            $taxonomy = get_taxonomy( get_query_var( 'taxonomy' ) );
+                            printf( $taxonomy->labels->singular_name, $term->name );
 
-					elseif ( is_tag() ):
-						printf( __( 'Tag Archives: %s', '7boom' ), single_tag_title( '', false ) );
+                        elseif ( is_day() ) :
+                            printf( get_the_date() );
 
-					elseif ( is_tax() ):
-						$term     = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
-						$taxonomy = get_taxonomy( get_query_var( 'taxonomy' ) );
-						printf( __( '%s Archives: %s', '7boom' ), $taxonomy->labels->singular_name, $term->name );
+                        elseif ( is_month() ) :
+                            printf( get_the_date( _x( 'F Y', 'monthly archives date format', '7boom' ) ) );
 
-					elseif ( is_day() ) :
-						printf( __( 'Daily Archives: %s', '7boom' ), get_the_date() );
+                        elseif ( is_year() ) :
+                            printf( get_the_date( _x( 'Y', 'yearly archives date format', '7boom' ) ) );
 
-					elseif ( is_month() ) :
-						printf( __( 'Monthly Archives: %s', '7boom' ), get_the_date( _x( 'F Y', 'monthly archives date format', '7boom' ) ) );
+                        elseif ( is_author() ) : the_post();
+                            printf( get_the_author() );
 
-					elseif ( is_year() ) :
-						printf( __( 'Yearly Archives: %s', '7boom' ), get_the_date( _x( 'Y', 'yearly archives date format', '7boom' ) ) );
+                        else :
+                            _e( 'Archives', '7boom' );
 
-					elseif ( is_author() ) : the_post();
-						printf( __( 'All posts by %s', '7boom' ), get_the_author() );
+                        endif;
+                    ?>
+                </h1>
 
-					else :
-						_e( 'Archives', '7boom' );
+                <ul class="search_results">
+                <?php
+                while ( have_posts() ) : the_post();
+                    get_template_part( 'loop', 'archive' );
 
-					endif;
-				?>
-			</h1><?php
+                endwhile; ?>
+                </ul>
 
-			if ( is_category() || is_tag() || is_tax() ):
-				$term_description = term_description();
-				if ( ! empty( $term_description ) ) : ?>
 
-					<div class="archive-description"><?php
-						echo $term_description; ?>
-					</div><?php
+            <?php
+            else :
 
-				endif;
-			endif;
+                get_template_part( 'loop', 'empty' );
 
-			if ( is_author() && get_the_author_meta( 'description' ) ) : ?>
-
-				<div class="archive-description">
-					<?php the_author_meta( 'description' ); ?>
-				</div><?php
-
-			endif;
-
-			while ( have_posts() ) : the_post();
-
-				get_template_part( 'loop', get_post_format() );
-
-			endwhile;
-
-		else :
-
-			get_template_part( 'loop', 'empty' );
-
-		endif; ?>
-
-		<div class="pagination">
-
-			<?php get_template_part( 'template-part', 'pagination' ); ?>
-
-		</div>
+            endif; ?>
+        </div>
+        
+        <!-- GET SIDEBAR -->
+        <?php get_sidebar(); ?>
+        <!-- END GET SIDEBAR -->
 	</section>
 
 <?php get_footer(); ?>

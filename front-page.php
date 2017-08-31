@@ -63,15 +63,20 @@ $exlude_post_ids = [];
 
     
     <!-- FULL BANNER CONTAINER -->
-	<div class="ad_container full_width">
-		<div class="ad_unit billboard">
-			<img src="http://via.placeholder.com/970x250" alt="">
-		</div>
-		
-		<div class="ad_unit boxbanner">
-			<img src="http://via.placeholder.com/300x250" alt="">
-		</div>
-	</div>
+	<?php get_template_part('template_parts/banner', 'billboard'); ?>
+    
+    <?php if( wp_is_mobile() ){ ?>
+       <div class="ad_container mobile">
+            <div class="ad_unit boxbanner">
+                <!-- /94465771/7boom_m_Boxbanner_All -->
+                <div id='div-gpt-ad-1503950138877-0'>
+                    <script>
+                        googletag.cmd.push(function() { googletag.display('div-gpt-ad-1503950138877-0'); });
+                    </script>
+                </div>
+            </div>
+        </div>
+    <?php } ?>
     <!-- END: FULL BANNER CONTAINER -->
 
 
@@ -150,27 +155,10 @@ $exlude_post_ids = [];
                 </ul>
             </div>
 
-           
-           
-           
-            <div class="module ad_container">
-                <div class="ad_unit">
-                    <img src="http://via.placeholder.com/300x250" alt="">
-                </div>
-            </div>
 
-           
-           
-           
-            <div class="module ad_container desktop">
+            <div class="module facebook-like">
                 <div class="ad_unit">
-                    <img src="http://via.placeholder.com/300x250" alt="">
-                </div>
-            </div>
-
-            <div class="module ad_container facebook-like">
-                <div class="ad_unit">
-                    <img src="http://via.placeholder.com/300x250/4268b2?Like+1M" alt="">
+                    <img src="http://via.placeholder.com/300x50/4268b2?Like+1M" alt="">
                 </div>
             </div>
         </aside>

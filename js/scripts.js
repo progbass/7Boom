@@ -1,4 +1,47 @@
 const Axios = require('../grunt/node_modules/axios');
+const DFPManager = require('./DFPManager');
+
+
+
+/////////////////////////////////////////////////////////////
+// SOCIAL SHARE
+/////////////////////////////////////////////////////////////
+window.socialshare = function(id, urlpost, titles){
+	//properties
+	var source = urlpost;
+	var url="";
+	
+	
+	//Choose Social Network
+	switch(id){
+		case 'facebook':
+			url = 'https://www.facebook.com/sharer/sharer.php?u=' + source;
+			break;
+			
+		case 'twitter':
+			title = encodeURIComponent(titles);
+			url = 'https://twitter.com/intent/tweet?text='+title+'&url='+source;
+			break;
+			
+		default:
+			break;
+	}
+	
+	
+	//Pop up settings
+	var w = 500;
+	var h = 250;
+	var left = (screen.width/2)-(w/2);
+	var top = (screen.height/2)-(h/2);
+	
+	//open popup
+	myWindow = window.open (url, 'win_share','width='+w+',height='+h+', top='+top+', left='+left);
+
+	//
+	return false;
+};
+
+
 
 
 
@@ -124,26 +167,32 @@ const Axios = require('../grunt/node_modules/axios');
     menu_main.addEventListener('click', function(e){
         const button = e.target;
         
-        //
-        try{
-            let dynamicContent;
-            for(let i=0; i<categories.length; i++){
-                var container_cat = 'menu-'+categories[i];
-                if(button.parentNode.classList.contains(container_cat)){
-                    dynamicContent = true;
-                    break;
+        if( base_reference.section === 'home' ){
+            //
+            try{
+                let dynamicContent;
+                for(let i=0; i<categories.length; i++){
+                    var container_cat = 'menu-'+categories[i];
+                    if(button.parentNode.classList.contains(container_cat)){
+                        dynamicContent = true;
+                        break;
+                    }
+
+                    dynamicContent = false;
                 }
-                
-                dynamicContent = false;
-            }
+
+                // 
+                if(dynamicContent){
+                    e.preventDefault();
+                    loadContent(container_cat.substring(5))
+                }
+
+            } catch (error){}
             
-            // 
-            if(dynamicContent){
-                e.preventDefault();
-                loadContent(container_cat.substring(5))
-            }
-               
-        } catch (error){}
+            return;
+        }
+        
+        
     });
     
     
@@ -220,7 +269,7 @@ const Axios = require('../grunt/node_modules/axios');
             if(_section === 'single'){
                 //const parser = 
                 const fragment = new DOMParser().parseFromString(response_html, "text/html").body.firstChild;
-            console.log(fragment)
+                //console.log(fragment)
                 //ajax_container.innerHTML = '´ørale chido';
                 ajax_container.appendChild(fragment);
             } else {
@@ -231,14 +280,32 @@ const Axios = require('../grunt/node_modules/axios');
             resizeImages();
             resetLayout([ 2 ], 3);
             
-            // Add Banner
-            //createAdUnitContainer();
+            // Add Banners
+            adsHandler.init();
         })
         .catch(function (error) {
             loading_content = false;
             console.log(error);
         });
 	}
+    
+    
+    
+    
+    
+    
+    ////////////////////////////////////////////////////////
+	/// DYNAMIC DFP AD UNITS (LOAD ON EACH PAGINATION)
+	////////////////////////////////////////////////////////
+    let adsHandler;
+	if(base_reference.section == 'single' || base_reference.section == 'home' || base_reference.section == 'category' ){
+		adsHandler = new DFPManager(base_reference);
+        adsHandler.init();
+    }
+
+    
+    
+    
     
     
     

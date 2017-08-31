@@ -204,6 +204,7 @@ function boom_enqueue_scripts() {
 		'total_pages'		=> $query->max_num_pages,
 		'section'			=> $section,
 		'isMobile'			=> wp_is_mobile() ? 'true' : 'false',
+        'category'          => get_category($query->query_vars['cat'])->slug
 
 	);
 	wp_localize_script('main_js', 'base_reference', $reference_object );
@@ -460,3 +461,118 @@ add_action( 'wp_ajax_ajax_pagination_category', 'template_ajax_pagination_catego
 
 
 
+
+/////////////////////////////////////////////////////////////
+// ADD DOUBLECLICK FOR PUBLISHERS (DFP)
+/////////////////////////////////////////////////////////////
+function add_DFP(){ ?>
+	
+	<script async='async' src='https://www.googletagservices.com/tag/js/gpt.js'></script>
+	<script>
+	  var googletag = googletag || {};
+	  googletag.cmd = googletag.cmd || [];
+	</script>
+
+	<script>
+	  var ad_home_billboard,
+	  	  ad_mobile_box;
+
+	  googletag.cmd.push(function() {
+          
+          
+	  	<?php
+	  	if( !wp_is_mobile() ){ ?>
+	  	    googletag.defineSlot('/94465771/7boom_Billboard_all', [[728, 90], [970, 250]], 'div-gpt-ad-1503949356736-0').addService(googletag.pubads());
+	  		
+            googletag.defineSlot('/94465771/7boom_Billboard_9am', [[728, 90], [970, 250]], 'div-gpt-ad-1503949678961-0').addService(googletag.pubads());
+            googletag.defineSlot('/94465771/7boom_Billboard_6pm', [[970, 250], [728, 90]], 'div-gpt-ad-1503949716909-0').addService(googletag.pubads());
+            googletag.defineSlot('/94465771/7boom_Billboard_8pm', [[728, 90], [970, 250]], 'div-gpt-ad-1503949802451-0').addService(googletag.pubads());
+            
+        <?php
+		} else { ?>
+            googletag.defineSlot('/94465771/7boom_m_Boxbanner_All', [[300, 250], [300, 300]], 'div-gpt-ad-1503950138877-0').addService(googletag.pubads());
+        
+            googletag.defineSlot('/94465771/7boom_m_Boxbanner_9am', [[300, 300], [300, 250]], 'div-gpt-ad-1503950165993-0').addService(googletag.pubads());
+            googletag.defineSlot('/94465771/7boom_m_Boxbanner_6pm', [[300, 300], [300, 250]], 'div-gpt-ad-1503950188173-0').addService(googletag.pubads());
+            googletag.defineSlot('/94465771/7boom_m_Boxbanner_8pm', [[300, 300], [300, 250]], 'div-gpt-ad-1503950213186-0').addService(googletag.pubads());
+          
+          <?php
+        } ?>
+
+	  	googletag.defineSlot('/94465771/7boom_Boxbanner_1_All', [[300, 250], [300, 300]], 'div-gpt-ad-1503949907122-0').addService(googletag.pubads());   
+        googletag.defineSlot('/94465771/7boom_Boxbanner_2_All', [[300, 300], [300, 250]], 'div-gpt-ad-1503950030022-0').addService(googletag.pubads());   
+	    
+        googletag.defineSlot('/94465771/7boom_Boxbanner_1_9am', [[300, 250], [300, 300]], 'div-gpt-ad-1503949935630-0').addService(googletag.pubads());
+        googletag.defineSlot('/94465771/7boom_Boxbanner_2_9am', [[300, 250], [300, 300]], 'div-gpt-ad-1503950060345-0').addService(googletag.pubads());
+        googletag.defineSlot('/94465771/7boom_Boxbanner_1_6pm', [[300, 250], [300, 300]], 'div-gpt-ad-1503949960322-0').addService(googletag.pubads());
+        googletag.defineSlot('/94465771/7boom_Boxbanner_2_6pm', [[300, 250], [300, 300]], 'div-gpt-ad-1503950079788-0').addService(googletag.pubads());
+        googletag.defineSlot('/94465771/7boom_Boxbanner_1_8pm', [[300, 250], [300, 300]], 'div-gpt-ad-1503949983999-0').addService(googletag.pubads());
+        googletag.defineSlot('/94465771/7boom_Boxbanner_2_8pm', [[300, 250], [300, 300]], 'div-gpt-ad-1503950105552-0').addService(googletag.pubads());
+          
+	    googletag.pubads().enableSingleRequest();
+	    //googletag.pubads().disableInitialLoad();
+	    googletag.enableServices();
+	  });
+	</script>
+
+<?php
+}
+add_action('wp_head', 'add_DFP');
+/////////////////////////////////////////////////////////////
+// END DOUBLECLICK FOR PUBLISHERS (DFP)
+/////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////
+// ADD COMSCORE TAG (FOOTER)
+/////////////////////////////////////////////////////////////
+function add_comScore(){ ?>
+
+	<!-- Begin comScore Inline Tag 1.1302.13 -->
+	<script type="text/javascript" language="JavaScript1.3" src="http://b.scorecardresearch.com/c2/9734177/ct.js"></script>
+	<!-- End comScore Inline Tag -->
+
+<?php
+}
+add_action('wp_footer', 'add_comScore');
+/////////////////////////////////////////////////////////////
+// END COMSCORE TAG
+/////////////////////////////////////////////////////////////
+        
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////
+// ADD GOOGLE ANALYTICS (FOOTER)
+/////////////////////////////////////////////////////////////
+function add_GoogleAnalyticsTag(){ ?>
+    <!-- Begin Google Analytics Tag -->
+	<script>
+         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+         ga('create', 'UA-36293587-1', 'auto');
+         ga('send', 'pageview');
+    </script>
+    <!-- End Google Analytics Tag -->
+
+<?php
+}
+add_action('wp_footer', 'add_GoogleAnalyticsTag');
+/////////////////////////////////////////////////////////////
+// END GOOGLE ANALYTICS 
+/////////////////////////////////////////////////////////////
+
+
+        
