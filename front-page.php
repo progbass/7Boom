@@ -109,51 +109,76 @@ $exlude_post_ids = [];
                 <h3>Lo &Uacute;ltimo</h3>
 
                 <ul>
-                   <?php
-                    $recent_args = array(
-                        'posts_per_page' => 4,
-                        'post__not_in' => $exlude_post_ids
-                    );
-                    $recent_posts = new WP_Query($recent_args);
-                    
-                    if ( $recent_posts->have_posts() ) :
+                <?php
+                $recent_args = array(
+                    'posts_per_page' => 4,
+                    'post__not_in' => $exlude_post_ids
+                );
+                $recent_posts = new WP_Query($recent_args);
 
-                        while ( $recent_posts->have_posts() ) :
-                            $recent_posts->the_post();
-                            array_push($exlude_post_ids, get_the_ID()); ?>
-                        
-                            <li <?php post_class(); ?>>
-                                <div class="photo_container">
-                                    <a href="<?php the_permalink() ?>"><?php the_post_thumbnail(); ?></a>
+                if ( $recent_posts->have_posts() ) :
+
+                    while ( $recent_posts->have_posts() ) :
+                        $recent_posts->the_post();
+                        array_push($exlude_post_ids, get_the_ID()); ?>
+
+                        <li <?php post_class(); ?>>
+                            <div class="photo_container">
+                                <a href="<?php the_permalink() ?>"><?php the_post_thumbnail(); ?></a>
+                            </div>
+
+                            <div class="info_container">
+                                <h2><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h2>
+
+                                   <?php
+                                    $category = get_the_category( $id )[0];
+                                    $category_link = get_category_link( $category->term_id );
+                                    ?>
+                                   <div class="meta">
+                                    <div class="category"><a href="<?php echo esc_url( $category_link ); ?>"><?php echo $category->name ?></a></div>
+                                    <div class="date"><?php the_time('d F y') ?></div>
                                 </div>
+                            </div>
+                        </li>
 
-                                <div class="info_container">
-                                    <h2><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h2>
-                                    
-                                       <?php
-                                        $category = get_the_category( $id )[0];
-                                        $category_link = get_category_link( $category->term_id );
-                                        ?>
-                                       <div class="meta">
-                                        <div class="category"><a href="<?php echo esc_url( $category_link ); ?>"><?php echo $category->name ?></a></div>
-                                        <div class="date"><?php the_time('d F y') ?></div>
-                                    </div>
-                                </div>
-                            </li>
+                    <?php
+                    endwhile;
 
-                        <?php
-                        endwhile;
-				
-                        // Restore original Post Data
-                        wp_reset_postdata();
-                                            
+                    // Restore original Post Data
+                    wp_reset_postdata();
 
-                    else :
-                        get_template_part( 'loop', 'empty' );
-                    endif;
-                    ?>
+
+                else :
+                    get_template_part( 'loop', 'empty' );
+                endif;
+                ?>
                 </ul>
             </div>
+            
+            
+            
+            <div class="module ad_container">
+                <div class="ad_unit">
+                    <!-- /94465771/7boom_Boxbanner_1_All -->
+                    <div id='div-gpt-ad-1503949907122-0'>
+                        <script>
+                            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1503949907122-0'); });
+                        </script>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="module ad_container">
+                <div class="ad_unit">
+                    <!-- /94465771/7boom_Boxbanner_2_All -->
+                    <div id='div-gpt-ad-1503950030022-0'>
+                        <script>
+                            googletag.cmd.push(function() { googletag.display('div-gpt-ad-1503950030022-0'); });
+                        </script>
+                    </div>
+                </div>
+            </div>
+            
 
 
             <div class="module facebook-like">

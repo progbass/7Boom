@@ -482,32 +482,32 @@ function add_DFP(){ ?>
           
 	  	<?php
 	  	if( !wp_is_mobile() ){ ?>
-	  	    // googletag.defineSlot('/94465771/7boom_Billboard_all', [[728, 90], [970, 250]], 'div-gpt-ad-1503949356736-0').addService(googletag.pubads());
+	  	    googletag.defineSlot('/94465771/7boom_Billboard_all', [[728, 90], [970, 250]], 'div-gpt-ad-1503949356736-0').addService(googletag.pubads());
 	  		
-            // googletag.defineSlot('/94465771/7boom_Billboard_9am', [[728, 90], [970, 250]], 'div-gpt-ad-1503949678961-0').addService(googletag.pubads());
-            // googletag.defineSlot('/94465771/7boom_Billboard_6pm', [[970, 250], [728, 90]], 'div-gpt-ad-1503949716909-0').addService(googletag.pubads());
-            // googletag.defineSlot('/94465771/7boom_Billboard_8pm', [[728, 90], [970, 250]], 'div-gpt-ad-1503949802451-0').addService(googletag.pubads());
+            googletag.defineSlot('/94465771/7boom_Billboard_9am', [[728, 90], [970, 250]], 'div-gpt-ad-1503949678961-0').addService(googletag.pubads());
+            googletag.defineSlot('/94465771/7boom_Billboard_6pm', [[970, 250], [728, 90]], 'div-gpt-ad-1503949716909-0').addService(googletag.pubads());
+            googletag.defineSlot('/94465771/7boom_Billboard_8pm', [[728, 90], [970, 250]], 'div-gpt-ad-1503949802451-0').addService(googletag.pubads());
             
         <?php
 		} else { ?>
             googletag.defineSlot('/94465771/7boom_m_Boxbanner_All', [[300, 250], [300, 300]], 'div-gpt-ad-1503950138877-0').addService(googletag.pubads());
         
-            // googletag.defineSlot('/94465771/7boom_m_Boxbanner_9am', [[300, 300], [300, 250]], 'div-gpt-ad-1503950165993-0').addService(googletag.pubads());
-            // googletag.defineSlot('/94465771/7boom_m_Boxbanner_6pm', [[300, 300], [300, 250]], 'div-gpt-ad-1503950188173-0').addService(googletag.pubads());
-            // googletag.defineSlot('/94465771/7boom_m_Boxbanner_8pm', [[300, 300], [300, 250]], 'div-gpt-ad-1503950213186-0').addService(googletag.pubads());
+            googletag.defineSlot('/94465771/7boom_m_Boxbanner_9am', [[300, 300], [300, 250]], 'div-gpt-ad-1503950165993-0').addService(googletag.pubads());
+            googletag.defineSlot('/94465771/7boom_m_Boxbanner_6pm', [[300, 300], [300, 250]], 'div-gpt-ad-1503950188173-0').addService(googletag.pubads());
+            googletag.defineSlot('/94465771/7boom_m_Boxbanner_8pm', [[300, 300], [300, 250]], 'div-gpt-ad-1503950213186-0').addService(googletag.pubads());
           
           <?php
         } ?>
 
-	  	// googletag.defineSlot('/94465771/7boom_Boxbanner_1_All', [[300, 250], [300, 300]], 'div-gpt-ad-1503949907122-0').addService(googletag.pubads());   
-        // googletag.defineSlot('/94465771/7boom_Boxbanner_2_All', [[300, 300], [300, 250]], 'div-gpt-ad-1503950030022-0').addService(googletag.pubads());   
+	  	googletag.defineSlot('/94465771/7boom_Boxbanner_1_All', [[300, 250], [300, 300]], 'div-gpt-ad-1503949907122-0').addService(googletag.pubads());   
+        googletag.defineSlot('/94465771/7boom_Boxbanner_2_All', [[300, 300], [300, 250]], 'div-gpt-ad-1503950030022-0').addService(googletag.pubads());   
 	    
-        // googletag.defineSlot('/94465771/7boom_Boxbanner_1_9am', [[300, 250], [300, 300]], 'div-gpt-ad-1503949935630-0').addService(googletag.pubads());
-        // googletag.defineSlot('/94465771/7boom_Boxbanner_2_9am', [[300, 250], [300, 300]], 'div-gpt-ad-1503950060345-0').addService(googletag.pubads());
-        // googletag.defineSlot('/94465771/7boom_Boxbanner_1_6pm', [[300, 250], [300, 300]], 'div-gpt-ad-1503949960322-0').addService(googletag.pubads());
-        // googletag.defineSlot('/94465771/7boom_Boxbanner_2_6pm', [[300, 250], [300, 300]], 'div-gpt-ad-1503950079788-0').addService(googletag.pubads());
-        // googletag.defineSlot('/94465771/7boom_Boxbanner_1_8pm', [[300, 250], [300, 300]], 'div-gpt-ad-1503949983999-0').addService(googletag.pubads());
-        // googletag.defineSlot('/94465771/7boom_Boxbanner_2_8pm', [[300, 250], [300, 300]], 'div-gpt-ad-1503950105552-0').addService(googletag.pubads());
+        googletag.defineSlot('/94465771/7boom_Boxbanner_1_9am', [[300, 250], [300, 300]], 'div-gpt-ad-1503949935630-0').addService(googletag.pubads());
+        googletag.defineSlot('/94465771/7boom_Boxbanner_2_9am', [[300, 250], [300, 300]], 'div-gpt-ad-1503950060345-0').addService(googletag.pubads());
+        googletag.defineSlot('/94465771/7boom_Boxbanner_1_6pm', [[300, 250], [300, 300]], 'div-gpt-ad-1503949960322-0').addService(googletag.pubads());
+        googletag.defineSlot('/94465771/7boom_Boxbanner_2_6pm', [[300, 250], [300, 300]], 'div-gpt-ad-1503950079788-0').addService(googletag.pubads());
+        googletag.defineSlot('/94465771/7boom_Boxbanner_1_8pm', [[300, 250], [300, 300]], 'div-gpt-ad-1503949983999-0').addService(googletag.pubads());
+        googletag.defineSlot('/94465771/7boom_Boxbanner_2_8pm', [[300, 250], [300, 300]], 'div-gpt-ad-1503950105552-0').addService(googletag.pubads());
           
 	    googletag.pubads().enableSingleRequest();
 	    //googletag.pubads().disableInitialLoad();
