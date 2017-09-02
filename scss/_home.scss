@@ -24,6 +24,11 @@ $category-list: (
         overflow: hidden;
         transition: 200ms;
         
+        &.video{
+            .photo_container:after{
+                display: block;
+            }
+        }
         &:hover{
             .photo_container{
                 img{
@@ -36,6 +41,16 @@ $category-list: (
             background: darken($color_main, 4%);
             @include responsive-container( percentage(480/360));
             overflow: hidden;
+            
+            &:after{
+                content: '';
+                display: none;
+                position: absolute;
+                width: 100px; height: 100px;
+                bottom: 27.5%;; right: 0;
+                background: url($path_images+'icon-play.png') no-repeat center;
+                background-size: contain;
+            }
             
             a{
                 position: absolute;
@@ -129,6 +144,10 @@ $category-list: (
             width: 50%;
             .photo_container{
                 @include responsive-container( percentage(600/620));
+            
+                &:after{
+                    bottom: 36%;
+                }
             }
 
             .info_container{
@@ -155,6 +174,17 @@ $category-list: (
 
 $aside-width: 320px;
 $aside-width: 320px;
+
+
+body.home{
+    .ad_container.full_width{
+        background: #788892;
+    }
+    
+    .ad_container.mobile{
+        background: #FFF;
+    }
+}
 
 
 
@@ -200,16 +230,33 @@ section#featured_articles{
                         
                         h2{
                             padding: 0 1.25em;
-                            font-size: 2em;
+                            font-size: 1.75em;
                             text-transform: uppercase;
                         }
                     }
                 }
+                &:nth-child(2){
+                    border: solid 3px #fff;
+                    border-top: none;
+                    border-bottom-width: 1.5px;
+                }
                 &:nth-child(3){
-                   top: 33.333%
+                    top: 33.333%;
+                    border: solid 3px #fff;
+                    border-top-width: 1.5px;
+                    border-bottom-width: 1.5px;
                 }
                 &:nth-child(4){
-                   top: 66.666%
+                    top: 66.666%;
+                    border: solid 3px #fff;
+                    border-bottom: none;
+                    border-top-width: 1.5px;
+
+                    .info_container{
+                        height: 50%;
+
+                        h2{margin-top: -.2em;}
+                    }
                 }
 
                 .photo_container{
@@ -269,6 +316,7 @@ section#featured_articles{
                 }
                 &:nth-child(3){
                     top: 50%;
+                    border-bottom: none;
                 }
                 
                 &:nth-child(4){
@@ -277,6 +325,7 @@ section#featured_articles{
                     right: 0;
                     width: #{$aside-width};
                     height: 100%;
+                    border: none;
 
                     .info_container{
                         height: 20%;
@@ -344,6 +393,11 @@ section#featured_articles{
                     .photo_container{
                         flex: 1;
                         @include responsive-container( percentage(400/520));
+                        
+                        
+                        &:after{
+                            bottom: 47%
+                        }
                     }
                     .info_container{
                         height: 50% !important;
@@ -401,10 +455,6 @@ section#featured_articles{
                 &.desktop{
                     display: block;
                 }
-
-                &.facebook-like{
-                    display: block;
-                }
             }
         }
     }
@@ -435,6 +485,13 @@ section#featured_articles{
                 > li:nth-child(odd){
                     .info_container{
                         height: 25% !important;
+                    }
+                    
+                    .photo_container{
+                        
+                        &:after{
+                            bottom: 25%;
+                        }
                     }
                 }
             }
@@ -585,21 +642,40 @@ section#featured_articles{
 
 
 aside{
+    .module{
+        position: relative;
+        margin-bottom: 10px;
+        
+        &:last-child{
+            margin-bottom: 0;
+        }
+    }
+    
+    
     
     /*=============================
 	RECENT POSTS LIST
 	=============================*/
     .recent-posts{
-        position: relative;
         
         h3{
             text-align: center;
             margin: 0 auto;
             padding: .75em $mobile-padding;
+            font-family: $header_font;
+            
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
         
         ul{
             @extend %recent_posts_list;
+            
+            li{
+                h2{
+                    font-weight: normal
+                }
+            }
         }
     }
     
@@ -609,7 +685,7 @@ aside{
 	ADVERTISEMENT
 	=============================*/
     .ad_container{
-        padding: 5px 0;  
+        //padding: 5px 0;  
         
         img{
             display: block;
@@ -626,6 +702,42 @@ aside{
         // MEDIA QUERIES
         @include mediaQuery($bp_small) {
             //width: 50%;
+        }
+    }
+            
+            
+    /*=============================
+    FACEBOOK LIKE
+    =============================*/
+    .facebook-like{
+        display: block; 
+        color: #fff;
+        background: #4167b2 url($path_images+'icon-like.png') no-repeat calc(50% - 100px) 50%;
+        background-size: 50px;
+        text-align: center;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+
+        .container{
+        }
+        
+        
+        a{
+            display: block;
+            position: relative;
+            padding: 18px 10px;
+            width: 300px;
+            margin: 0 auto;
+            color: #fff;
+            font-family: $header_font;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 0.07em;
+            
+            span{
+                font-weight: 300;
+            }
         }
     }
 }

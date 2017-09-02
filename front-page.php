@@ -157,8 +157,8 @@ $exlude_post_ids = [];
 
 
             <div class="module facebook-like">
-                <div class="ad_unit">
-                    <img src="http://via.placeholder.com/300x50/4268b2?Like+1M" alt="">
+                <div class="container">
+                    <a href="https://www.facebook.com/7BoomMex">LIKE <span>1.5M</span></a>
                 </div>
             </div>
         </aside>

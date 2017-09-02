@@ -19,30 +19,52 @@ footer{
         img{
            position: absolute;
             width: 100%; height: auto;
-            max-width: 50px;
+            max-width: 60px;
             top:0; left: 0;
             @include center-content(50%, 50%);
             
         }
     }
+    .logo_sponsor{
+        
+        img{
+            max-width: 75px;
+        }
+    }
     
-    .facebook-page{
+    .social-networks{
         order: 1;
         width: 100%;
-        padding: 10px $mobile-padding;
+        padding: 10px $mobile-padding 5px;
         text-align: center;
         background: darken($color_main, 10%);
         
+        
         a{
+            display: inline-block;
+            @include hide-text();
+            @include responsive-container(100%);
+            margin: 0 10px;
+            width: 25px;
+            
             color: #fff;
             text-decoration: none;
+            background: url($path_images+'icon-menu-facebook.svg') no-repeat center;
+            background-size: contain;
+            
+            &.facebook{
+                background-image: url($path_images+'icon-menu-facebook.svg');
+            }
+            &.whatsapp{
+                background-image: url($path_images+'icon-whatsapp.svg');
+            }
         }
     }
     
     .menu{
         position: relative;
         padding: 0 $mobile-padding;
-        margin-bottom: 1em;
+        margin: 0.25em auto 0.5em;
         
         ul{
             list-style: none;
@@ -51,9 +73,9 @@ footer{
             font-size: 0;
             
             li{
-                display: inline;
-                padding: 2px 5px;
-                border-right: solid 1px #fff;
+                display: inline-block;
+                padding: 2px 7px;
+                margin-bottom: 5px;
                 
                 font-size: 12px;
                 font-family: $header-font;
@@ -82,17 +104,28 @@ footer{
         
         .logo{
             width: 20%;
+            img{
+                max-width: 70px;
+                margin-top: -6px;
+            }
         }
         .logo_sponsor{
             width: 20%;
             order: 1;
             img{
-                max-width: 80px;
+                max-width: 90px;
             }
         }
         
         .menu{
-            width: 60%
+            width: 60%;
+            align-self: center;
+            
+            ul{
+                li{
+                    border-right: solid 1px #fff;
+                }
+            }
         }
     }
 }

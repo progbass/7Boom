@@ -1,5 +1,5 @@
 node_modules
 dist
-grunt
+gulp
 bower_component
 doc

@@ -18,11 +18,17 @@
             </div>
 
             <div class="logo_sponsor">
-                <img src="<?php bloginfo('template_url') ?>/images/logo-brutalContent.png" alt="Powered by Brutal Content">
+                <a href="http://brutalcontent.com"><img src="<?php bloginfo('template_url') ?>/images/logo-brutalContent.png" alt="Powered by Brutal Content"></a>
             </div>
 
-            <div class="facebook-page">
-                <a href="http://www.facebook.com">Facebook</a>
+            <div class="social-networks">
+                <a href="https://www.facebook.com/7BoomMex" class="facebook">Facebook</a>
+                
+                <?php
+                if(wp_is_mobile()): ?>
+                    <a class="whatsapp" onclick="socialshare('whatsapp', '<?php bloginfo('url'); ?>', '<?php wp_title(); ?>');">Whatsapp</a>
+                <?php
+                endif; ?>
             </div>
 
 
@@ -30,8 +36,8 @@
                 <ul>
                     <li><a href="#">T&eacute;rminos y Condiciones</a></li>
                     <li><a href="#">Aviso de Privacidad</a></li>
-                    <li><a href="#">Copyright © 2017 · All Rights Reserved</span></a></li>
-                    <li><a href="#">Contacto</a></li>
+                    <li>Copyright © 2017 · All Rights Reserved</li>
+                    <li><a href="mailto:contacto@brutalcontent.com">Contacto</a></li>
                 </ul>
             </nav>
         </footer>

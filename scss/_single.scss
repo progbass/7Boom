@@ -80,7 +80,8 @@ section#single{
             // ITEM
             li{
                 display: inline-block;
-                margin-right: .12em;
+                margin: 0 .12em 5px 0;
+                
                 &:last-child{
                     margin-right: none;
                 }
@@ -226,9 +227,18 @@ section#single{
         
         
         /*------ AD UNITS --------*/
-        .ad_unit{
-            padding: 0;
+        .ad_container{
+            margin: auto;
             margin-bottom: 1em;
+            
+            .ad_unit{
+                padding: 0;
+            }
+            
+            @media screen and (max-width: 320px){
+                margin-left: #{-$mobile-padding};
+                margin-right: #{-$mobile-padding};
+            }
         }
 
 
@@ -265,9 +275,10 @@ section#single{
 				//padding: 1em 0;
 			}
 
-			iframe.instagram-media{
+			> iframe{
 				width: 100% !important;
 				max-width: 420px !important;
+                height: auto;
 				margin: auto !important;
 			}
 
@@ -328,6 +339,11 @@ section#single{
 				margin-bottom: 0;
 				font-style: italic;
 			}
+            h2{
+				color: #000;
+			    @extend .font-zeta;
+				margin: 0 auto .45em;
+            }
 
 			////////
 			p.footer{
@@ -621,6 +637,7 @@ section#single{
 			width: calc(300px + 20px);
             padding: 10px;
             margin: 0 (-$mobile-padding) 0 0;
+            align-self: flex-start;
 
 			.banner_holder{
 				margin-left: auto;

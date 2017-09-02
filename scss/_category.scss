@@ -6,7 +6,8 @@ $category-list: (
 
 
 
-body.category{
+body.category,
+body.archive{
 	background: #fff;
 }
 section#category{
@@ -29,14 +30,6 @@ section#category{
         &.category-#{$category}{
             h1.archive-title{
                 background: $color;
-            }
-            
-            ul.search_results{ 
-                > li{
-                    .category{
-                        background: $color;
-                    }
-                }
             }
         }
     }
@@ -61,6 +54,14 @@ section#category{
                 padding-bottom: 1em;
                 margin-bottom: 1.25em;
                 border-bottom: solid 1px #aaa;
+                
+                @each $category, $color in $category-list{
+                    &.category-#{$category}{
+                        .category{
+                            background: $color;
+                        }
+                    }
+                }
 
                 .category{
                     position: relative;
@@ -69,6 +70,8 @@ section#category{
                     font-family: $header-font;
                     text-transform: uppercase;
                     font-size: 12px;
+                    align-self: flex-start;
+                    background: $color_main;
 
                     a{
                         display: block;
@@ -297,13 +300,14 @@ section#category{
                 
                 li{
                     flex-flow: row nowrap;   
+                    
                     .category{
                         display: none;
-                    }
+                    } 
                     
                     .photo_container{
                         align-self: flex-start;
-                        flex: 1 0 140px;
+                        flex: 0 0 140px;
                         margin-right: 1em;
                     }
                 }

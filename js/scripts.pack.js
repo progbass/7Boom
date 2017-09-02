@@ -1,6 +1,170 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function() {
+  'use strict';
+
+  // desiredOffset - page offset to scroll to
+  // speed - duration of the scroll per 1000px
+  function __ANIMATE_SCROLL_TO(desiredOffset) {
+    var userOptions = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
+    if (desiredOffset instanceof HTMLElement) {
+      if (userOptions.element && userOptions.element instanceof HTMLElement) {
+        desiredOffset = (desiredOffset.getBoundingClientRect().top + userOptions.element.scrollTop)
+          - userOptions.element.getBoundingClientRect().top;
+      } else {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        desiredOffset = scrollTop + desiredOffset.getBoundingClientRect().top;
+      }
+    }
+
+    var defaultOptions = {
+      speed: 500,
+      minDuration: 250,
+      maxDuration: 1500,
+      cancelOnUserAction: true,
+      element: window,
+      onComplete: undefined,
+    };
+
+    var options = {};
+
+    Object.keys(defaultOptions).forEach(function(key) {
+      options[key] = userOptions[key] ? userOptions[key] : defaultOptions[key];
+    });
+
+    options.isWindow = options.element === window;
+
+    var initialScrollPosition = null;
+    var maxScroll = null;
+
+    if (options.isWindow) {
+      // get cross browser scroll position
+      initialScrollPosition = window.scrollY || document.documentElement.scrollTop;
+      // cross browser document height minus window height
+      maxScroll = Math.max(
+        document.body.scrollHeight, document.documentElement.scrollHeight,
+        document.body.offsetHeight, document.documentElement.offsetHeight,
+        document.body.clientHeight, document.documentElement.clientHeight
+      ) - window.innerHeight;
+    } else {
+      // DOM element
+      initialScrollPosition = options.element.scrollTop;
+      maxScroll = options.element.scrollHeight - options.element.clientHeight;
+    }
+
+    // If the scroll position is greater than maximum available scroll
+    if (desiredOffset > maxScroll) {
+      desiredOffset = maxScroll;
+    }
+
+    // Calculate diff to scroll
+    var diff = desiredOffset - initialScrollPosition;
+
+    // Do nothing if the page is already there
+    if (diff === 0) {
+      // Execute callback if there is any
+      if (options.onComplete && typeof options.onComplete === 'function') {
+        options.onComplete()
+      }
+
+      return;
+    }
+
+    // Calculate duration of the scroll
+    var duration = Math.abs(Math.round((diff / 1000) * options.speed));
+
+    // Set minimum and maximum duration
+    if (duration < options.minDuration) {
+      duration = options.minDuration;
+    } else if (duration > options.maxDuration) {
+      duration = options.maxDuration;
+    }
+
+    var startingTime = Date.now();
+
+    // Request animation frame ID
+    var requestID = null;
+
+    // Method handler
+    var handleUserEvent = null;
+
+    if (options.cancelOnUserAction) {
+      // Set handler to cancel scroll on user action
+      handleUserEvent = function() { cancelAnimationFrame(requestID); };
+      window.addEventListener('keydown', handleUserEvent);
+    } else {
+      // Set handler to prevent user actions while scroll is active
+      handleUserEvent = function(e) { e.preventDefault(); };
+      window.addEventListener('scroll', handleUserEvent);
+    }
+
+    window.addEventListener('wheel', handleUserEvent);
+    window.addEventListener('touchstart', handleUserEvent);
+
+    var step = function () {
+      var timeDiff = Date.now() - startingTime;
+      var t = (timeDiff / duration) - 1;
+      var easing = t * t * t + 1;
+      var scrollPosition = Math.round(initialScrollPosition + (diff * easing));
+
+      if (timeDiff < duration && scrollPosition !== desiredOffset) {
+        // If scroll didn't reach desired offset or time is not elapsed
+        // Scroll to a new position
+        // And request a new step
+
+        if (options.isWindow) {
+          options.element.scrollTo(0, scrollPosition);
+        } else {
+          options.element.scrollTop = scrollPosition;
+        }
+
+        requestID = requestAnimationFrame(step);
+      } else {
+        // If the time elapsed or we reached the desired offset
+        // Set scroll to the desired offset (when rounding made it to be off a pixel or two)
+        // Clear animation frame to be sure
+        if (options.isWindow) {
+          options.element.scrollTo(0, desiredOffset);
+        } else {
+          options.element.scrollTop = desiredOffset;
+        }
+        cancelAnimationFrame(requestID);
+
+        // Remove listeners
+        window.removeEventListener('wheel', handleUserEvent);
+        window.removeEventListener('touchstart', handleUserEvent);
+
+        if (options.cancelOnUserAction) {
+          window.removeEventListener('keydown', handleUserEvent);
+        } else {
+          window.removeEventListener('scroll', handleUserEvent);
+        }
+
+        // Animation is complete, execute callback if there is any
+        if (options.onComplete && typeof options.onComplete === 'function') {
+          options.onComplete()
+        }
+      }
+    };
+
+    // Start animating scroll
+    requestID = requestAnimationFrame(step);
+  }
+
+  if (typeof exports !== 'undefined') {
+    if (typeof module !== 'undefined' && module.exports) {
+      module.exports = __ANIMATE_SCROLL_TO;
+      exports = module.exports;
+    }
+    exports.default = __ANIMATE_SCROLL_TO;
+  } else if (window) {
+    window.animateScrollTo = __ANIMATE_SCROLL_TO;
+  }
+}).call(this);
+
+},{}],2:[function(require,module,exports){
 module.exports = require('./lib/axios');
-},{"./lib/axios":3}],2:[function(require,module,exports){
+},{"./lib/axios":4}],3:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -184,7 +348,7 @@ module.exports = function xhrAdapter(config) {
 };
 
 }).call(this,require('_process'))
-},{"../core/createError":9,"./../core/settle":12,"./../helpers/btoa":16,"./../helpers/buildURL":17,"./../helpers/cookies":19,"./../helpers/isURLSameOrigin":21,"./../helpers/parseHeaders":23,"./../utils":25,"_process":27}],3:[function(require,module,exports){
+},{"../core/createError":10,"./../core/settle":13,"./../helpers/btoa":17,"./../helpers/buildURL":18,"./../helpers/cookies":20,"./../helpers/isURLSameOrigin":22,"./../helpers/parseHeaders":24,"./../utils":26,"_process":28}],4:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -238,7 +402,7 @@ module.exports = axios;
 // Allow use of default import syntax in TypeScript
 module.exports.default = axios;
 
-},{"./cancel/Cancel":4,"./cancel/CancelToken":5,"./cancel/isCancel":6,"./core/Axios":7,"./defaults":14,"./helpers/bind":15,"./helpers/spread":24,"./utils":25}],4:[function(require,module,exports){
+},{"./cancel/Cancel":5,"./cancel/CancelToken":6,"./cancel/isCancel":7,"./core/Axios":8,"./defaults":15,"./helpers/bind":16,"./helpers/spread":25,"./utils":26}],5:[function(require,module,exports){
 'use strict';
 
 /**
@@ -259,7 +423,7 @@ Cancel.prototype.__CANCEL__ = true;
 
 module.exports = Cancel;
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 var Cancel = require('./Cancel');
@@ -318,14 +482,14 @@ CancelToken.source = function source() {
 
 module.exports = CancelToken;
 
-},{"./Cancel":4}],6:[function(require,module,exports){
+},{"./Cancel":5}],7:[function(require,module,exports){
 'use strict';
 
 module.exports = function isCancel(value) {
   return !!(value && value.__CANCEL__);
 };
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 var defaults = require('./../defaults');
@@ -413,7 +577,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = Axios;
 
-},{"./../defaults":14,"./../helpers/combineURLs":18,"./../helpers/isAbsoluteURL":20,"./../utils":25,"./InterceptorManager":8,"./dispatchRequest":10}],8:[function(require,module,exports){
+},{"./../defaults":15,"./../helpers/combineURLs":19,"./../helpers/isAbsoluteURL":21,"./../utils":26,"./InterceptorManager":9,"./dispatchRequest":11}],9:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -467,7 +631,7 @@ InterceptorManager.prototype.forEach = function forEach(fn) {
 
 module.exports = InterceptorManager;
 
-},{"./../utils":25}],9:[function(require,module,exports){
+},{"./../utils":26}],10:[function(require,module,exports){
 'use strict';
 
 var enhanceError = require('./enhanceError');
@@ -487,7 +651,7 @@ module.exports = function createError(message, config, code, request, response) 
   return enhanceError(error, config, code, request, response);
 };
 
-},{"./enhanceError":11}],10:[function(require,module,exports){
+},{"./enhanceError":12}],11:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -568,7 +732,7 @@ module.exports = function dispatchRequest(config) {
   });
 };
 
-},{"../cancel/isCancel":6,"../defaults":14,"./../utils":25,"./transformData":13}],11:[function(require,module,exports){
+},{"../cancel/isCancel":7,"../defaults":15,"./../utils":26,"./transformData":14}],12:[function(require,module,exports){
 'use strict';
 
 /**
@@ -591,7 +755,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
   return error;
 };
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict';
 
 var createError = require('./createError');
@@ -619,7 +783,7 @@ module.exports = function settle(resolve, reject, response) {
   }
 };
 
-},{"./createError":9}],13:[function(require,module,exports){
+},{"./createError":10}],14:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -641,7 +805,7 @@ module.exports = function transformData(data, headers, fns) {
   return data;
 };
 
-},{"./../utils":25}],14:[function(require,module,exports){
+},{"./../utils":26}],15:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -737,7 +901,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 }).call(this,require('_process'))
-},{"./adapters/http":2,"./adapters/xhr":2,"./helpers/normalizeHeaderName":22,"./utils":25,"_process":27}],15:[function(require,module,exports){
+},{"./adapters/http":3,"./adapters/xhr":3,"./helpers/normalizeHeaderName":23,"./utils":26,"_process":28}],16:[function(require,module,exports){
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -750,7 +914,7 @@ module.exports = function bind(fn, thisArg) {
   };
 };
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 'use strict';
 
 // btoa polyfill for IE<10 courtesy https://github.com/davidchambers/Base64.js
@@ -788,7 +952,7 @@ function btoa(input) {
 
 module.exports = btoa;
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -858,7 +1022,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
   return url;
 };
 
-},{"./../utils":25}],18:[function(require,module,exports){
+},{"./../utils":26}],19:[function(require,module,exports){
 'use strict';
 
 /**
@@ -874,7 +1038,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
     : baseURL;
 };
 
-},{}],19:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -929,7 +1093,7 @@ module.exports = (
   })()
 );
 
-},{"./../utils":25}],20:[function(require,module,exports){
+},{"./../utils":26}],21:[function(require,module,exports){
 'use strict';
 
 /**
@@ -945,7 +1109,7 @@ module.exports = function isAbsoluteURL(url) {
   return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
 };
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1015,7 +1179,7 @@ module.exports = (
   })()
 );
 
-},{"./../utils":25}],22:[function(require,module,exports){
+},{"./../utils":26}],23:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -1029,7 +1193,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
   });
 };
 
-},{"../utils":25}],23:[function(require,module,exports){
+},{"../utils":26}],24:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -1068,7 +1232,7 @@ module.exports = function parseHeaders(headers) {
   return parsed;
 };
 
-},{"./../utils":25}],24:[function(require,module,exports){
+},{"./../utils":26}],25:[function(require,module,exports){
 'use strict';
 
 /**
@@ -1097,7 +1261,7 @@ module.exports = function spread(callback) {
   };
 };
 
-},{}],25:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 'use strict';
 
 var bind = require('./helpers/bind');
@@ -1402,7 +1566,7 @@ module.exports = {
   trim: trim
 };
 
-},{"./helpers/bind":15,"is-buffer":26}],26:[function(require,module,exports){
+},{"./helpers/bind":16,"is-buffer":27}],27:[function(require,module,exports){
 /*!
  * Determine if an object is a Buffer
  *
@@ -1425,7 +1589,7 @@ function isSlowBuffer (obj) {
   return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
 }
 
-},{}],27:[function(require,module,exports){
+},{}],28:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -1611,13 +1775,15 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],28:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 ////////////////////////////////////////////////////////
 /// DYNAMIC DFP AD UNITS (LOAD ON EACH PAGINATION)
 ////////////////////////////////////////////////////////
 const DFPManager = function (_base_reference) {
     this.nextSlotId = 1;
     this.base_reference = _base_reference || {};
+    this.initFlag = false;
+    this.ignoredLoadListener = Array();
 };
 DFPManager.prototype.generateNextSlotName = function () {
     const id = this.nextSlotId++;
@@ -1665,6 +1831,7 @@ DFPManager.prototype.createAdUnitContainer = function () {
 
         // BOXBANNER THAT LOADS ONLY ON CATEGORIES
         if (this.base_reference.category) {
+
             try {
                 const box1_cat_container = document.createElement('div');
                 box1_cat_container.className = 'module ad_container';
@@ -1761,7 +1928,7 @@ DFPManager.prototype.createAdUnitContainer = function () {
             // ONLY MOBILE AD UNITS
             if (this.base_reference.isMobile == 'true') {
                 try {
-                    var mobile_adContainer = [].slice.call(document.querySelector('#single').querySelectorAll('article .content_holder .ad_container')).splice(-1, 1);
+                    var mobile_adContainer = [].slice.call(document.querySelector('#single').querySelectorAll('article .article_wrapper .ad_container')).splice(-1, 1);
                     let banner_container = mobile_adContainer[0].querySelector('.ad_unit');
                     banner_container.id = this.generateNextSlotName();
 
@@ -1788,12 +1955,34 @@ DFPManager.prototype.createAdUnitContainer = function () {
             }
         });
     }
+
+    if (!this.initFlag) {
+        this.initFlag = true;
+        googletag.cmd.push(() => {
+            googletag.pubads().addEventListener('slotRenderEnded', event => {
+                //debugger;
+                const targetID = event.slot.getSlotElementId();
+
+                if (this.ignoredLoadListener.indexOf(targetID) == -1) {
+                    console.log(targetID);
+
+                    if (event.isEmpty) {
+                        // Remove Unit Container
+                        var ad_fixedBottom = document.querySelector(`#${targetID}`).parentNode;
+                        ad_fixedBottom.parentElement.removeChild(ad_fixedBottom);
+                    }
+                }
+                this.ignoredLoadListener.push(targetID);
+            });
+        });
+    }
 };
 
 module.exports = DFPManager;
 
-},{}],29:[function(require,module,exports){
-const Axios = require('../grunt/node_modules/axios');
+},{}],30:[function(require,module,exports){
+const Axios = require('../gulp/node_modules/axios');
+const animateScrollTo = require('../gulp/node_modules/animated-scroll-to');
 const DFPManager = require('./DFPManager');
 
 /////////////////////////////////////////////////////////////
@@ -1939,7 +2128,9 @@ window.socialshare = function (id, urlpost, titles) {
 
 
     const categories = ['9am-6pm', '6pm-8pm', '8pm-finde'];
+    const header = document.querySelector('header');
     const menu_main = document.querySelector('#menu_main');
+    const menu_mobile_icon = header.querySelector('ul.mobile_items .menu');
     menu_main.addEventListener('click', function (e) {
         const button = e.target;
 
@@ -1961,11 +2152,23 @@ window.socialshare = function (id, urlpost, titles) {
                 if (dynamicContent) {
                     e.preventDefault();
                     loadContent(container_cat.substring(5));
+
+                    const options = {
+                        // duration of the scroll per 1000px, default 500
+
+                    };
+                    const target = header.offsetTop - header.scrollTop + header.clientTop;
+                    console.log(header.scrollTop);
+                    animateScrollTo(target, { speed: 800 });
                 }
             } catch (error) {}
 
             return;
         }
+    });
+
+    menu_mobile_icon.addEventListener('click', function () {
+        header.classList.toggle('open');
     });
 
     /////////////////////////////////////////////////////////////
@@ -2031,10 +2234,7 @@ window.socialshare = function (id, urlpost, titles) {
             // APPEND NEW ITEMS TO LIST
             var response_html = response.data;
             if (_section === 'single') {
-                //const parser = 
                 const fragment = new DOMParser().parseFromString(response_html, "text/html").body.firstChild;
-                //console.log(fragment)
-                //ajax_container.innerHTML = '´ørale chido';
                 ajax_container.appendChild(fragment);
             } else {
                 ajax_container.innerHTML = response_html;
@@ -2075,7 +2275,7 @@ window.socialshare = function (id, urlpost, titles) {
 
         // AJAX CALLS
         if (scrollPosition + window.innerHeight >= document.documentElement.offsetHeight) {
-            if (loading_enabled && !loading_content) {
+            if (loading_enabled && !loading_content && base_reference.section === 'single') {
                 loadContent();
             }
         }
@@ -2096,4 +2296,4 @@ window.socialshare = function (id, urlpost, titles) {
     window.addEventListener('resize', onResize);
 })();
 
-},{"../grunt/node_modules/axios":1,"./DFPManager":28}]},{},[29]);
+},{"../gulp/node_modules/animated-scroll-to":1,"../gulp/node_modules/axios":2,"./DFPManager":29}]},{},[30]);

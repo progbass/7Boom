@@ -1,4 +1,5 @@
-const Axios = require('../grunt/node_modules/axios');
+const Axios = require('../gulp/node_modules/axios');
+const animateScrollTo = require('../gulp/node_modules/animated-scroll-to');
 const DFPManager = require('./DFPManager');
 
 
@@ -163,7 +164,9 @@ window.socialshare = function(id, urlpost, titles){
     
     
     const categories = ['9am-6pm', '6pm-8pm', '8pm-finde'];
+    const header = document.querySelector('header');
     const menu_main = document.querySelector('#menu_main');
+    const menu_mobile_icon = header.querySelector('ul.mobile_items .menu');
     menu_main.addEventListener('click', function(e){
         const button = e.target;
         
@@ -184,7 +187,15 @@ window.socialshare = function(id, urlpost, titles){
                 // 
                 if(dynamicContent){
                     e.preventDefault();
-                    loadContent(container_cat.substring(5))
+                    loadContent(container_cat.substring(5));
+                    
+                    const options = {
+                      // duration of the scroll per 1000px, default 500
+                      
+                    };
+                    const target = (header.offsetTop - header.scrollTop + header.clientTop)
+                    console.log( header.scrollTop)
+                    animateScrollTo(target, {speed: 800});
                 }
 
             } catch (error){}
@@ -192,10 +203,11 @@ window.socialshare = function(id, urlpost, titles){
             return;
         }
         
-        
     });
     
-    
+    menu_mobile_icon.addEventListener('click', function(){
+        header.classList.toggle('open')
+    });
     
     
     
@@ -267,10 +279,7 @@ window.socialshare = function(id, urlpost, titles){
             // APPEND NEW ITEMS TO LIST
             var response_html = response.data;
             if(_section === 'single'){
-                //const parser = 
                 const fragment = new DOMParser().parseFromString(response_html, "text/html").body.firstChild;
-                //console.log(fragment)
-                //ajax_container.innerHTML = '´ørale chido';
                 ajax_container.appendChild(fragment);
             } else {
                 ajax_container.innerHTML = response_html;
@@ -325,7 +334,7 @@ window.socialshare = function(id, urlpost, titles){
 
 		// AJAX CALLS
        	if(scrollPosition+window.innerHeight >= document.documentElement.offsetHeight){
-       		if( loading_enabled && !loading_content ){
+       		if( loading_enabled && !loading_content && base_reference.section === 'single' ){
        			loadContent()
        		}
        	}

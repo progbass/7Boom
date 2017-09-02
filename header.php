@@ -67,7 +67,7 @@
 
                 <ul class="social_media">
                     <li class="search"><a href="#">Buscar</a></li>
-                    <li class="facebook"><a href="#">Facebook</a></li>
+                    <li class="facebook"><a href="https://www.facebook.com/7BoomMex">Facebook</a></li>
                 </ul>
             </header>
             <!-- END: HEADER & MAIN NAV -->

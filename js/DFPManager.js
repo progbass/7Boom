@@ -4,6 +4,8 @@
 const DFPManager = function(_base_reference){
     this.nextSlotId = 1;
     this.base_reference = _base_reference || {};
+    this.initFlag = false;
+    this.ignoredLoadListener = Array();
 }
 DFPManager.prototype.generateNextSlotName = function(){
     const id = this.nextSlotId++;
@@ -57,6 +59,7 @@ DFPManager.prototype.createAdUnitContainer = function(){
         
         // BOXBANNER THAT LOADS ONLY ON CATEGORIES
         if(this.base_reference.category){
+            
             try{
                 const box1_cat_container = document.createElement('div');
                 box1_cat_container.className = 'module ad_container';
@@ -100,9 +103,10 @@ DFPManager.prototype.createAdUnitContainer = function(){
                 googletag.display(box1_cat.id);
                 googletag.display(box2_cat.id);
                 googletag.pubads().refresh([box1_slot, box2_slot]);
+                
+                
             } catch(e){}
         }
-
         
 
         // ONLY DESKTOP AD UNITS
@@ -158,13 +162,15 @@ DFPManager.prototype.createAdUnitContainer = function(){
         }
     });
 
+    
+    
     if(this.base_reference.section == 'single'){
         googletag.cmd.push( () => {
 
             // ONLY MOBILE AD UNITS
             if( this.base_reference.isMobile == 'true' ){
                 try {
-                    var mobile_adContainer = [].slice.call(document.querySelector('#single').querySelectorAll('article .content_holder .ad_container')).splice(-1, 1);
+                    var mobile_adContainer = [].slice.call(document.querySelector('#single').querySelectorAll('article .article_wrapper .ad_container')).splice(-1, 1);
                     let banner_container = mobile_adContainer[0].querySelector('.ad_unit');
                     banner_container.id = this.generateNextSlotName();
 
@@ -194,6 +200,29 @@ DFPManager.prototype.createAdUnitContainer = function(){
             }
                 
         });		
+    }
+    
+    
+    
+    if(!this.initFlag){
+        this.initFlag = true;
+        googletag.cmd.push( () => {   
+            googletag.pubads().addEventListener('slotRenderEnded', (event) => {
+                //debugger;
+                const targetID = event.slot.getSlotElementId();
+
+                if(this.ignoredLoadListener.indexOf(targetID) == -1){
+                    console.log(targetID);
+                
+                    if ( event.isEmpty ){
+                        // Remove Unit Container
+                        var ad_fixedBottom = document.querySelector(`#${targetID}`).parentNode;
+                        ad_fixedBottom.parentElement.removeChild(ad_fixedBottom);
+                    }
+                }
+                this.ignoredLoadListener.push(targetID);
+            });
+        });
     }
 }
 
