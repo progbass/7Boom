@@ -152,7 +152,8 @@ header{
                 }
                     
                 @each $category, $color in $category-list{
-                    &.menu-#{$category}:hover{
+                    &.menu-#{$category}:hover,
+                    &.menu-#{$category}.current-menu-item{
                         background: $color;
                         color: #fff;
                     }

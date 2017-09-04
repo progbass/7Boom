@@ -21,8 +21,8 @@ $exlude_post_ids = [];
                 <?php
                 $featured_args = array(
                     'posts_per_page' => 4,
-                    //'meta_key' => 'featuredPost-checkbox',
-                    //'meta_value' => 'yes'
+                    'meta_key' => 'featuredPost-checkbox',
+                    'meta_value' => 'yes'
                 );
                 $featured_posts = new WP_Query($featured_args);
                 
@@ -86,10 +86,17 @@ $exlude_post_ids = [];
         <section id="latest_articles">
             <ul class="article_container">
                <?php
-                if ( have_posts() ) :
+                $recent_args = array(
+                    'offset' => 4,
+                    'post__not_in' => $exlude_post_ids
+                );
+                $recent_posts = new WP_Query($recent_args);
 
-                    while ( have_posts() ) : the_post();
+                if ( $recent_posts->have_posts() ) :
 
+                    while ( $recent_posts->have_posts() ) :
+                        $recent_posts->the_post();
+					    array_push($exlude_post_ids, get_the_ID());
                         get_template_part( 'loop', get_post_format() );
 
                     endwhile;
@@ -110,16 +117,16 @@ $exlude_post_ids = [];
 
                 <ul>
                 <?php
-                $recent_args = array(
+                $latest_args = array(
                     'posts_per_page' => 4,
                     'post__not_in' => $exlude_post_ids
                 );
-                $recent_posts = new WP_Query($recent_args);
+                $latest_posts = new WP_Query($latest_args);
 
-                if ( $recent_posts->have_posts() ) :
+                if ( $latest_posts->have_posts() ) :
 
-                    while ( $recent_posts->have_posts() ) :
-                        $recent_posts->the_post();
+                    while ( $latest_posts->have_posts() ) :
+                        $latest_posts->the_post();
                         array_push($exlude_post_ids, get_the_ID()); ?>
 
                         <li <?php post_class(); ?>>

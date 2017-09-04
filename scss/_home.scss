@@ -172,7 +172,14 @@ $category-list: (
 
 
 
-$aside-width: 320px;
+.preloader{
+    @include responsive-container(100%);
+    width: 50px;
+    margin: 150px auto 0;
+    background: url($path-images+'preloader.gif') no-repeat center;
+    background-size: contain;
+}
+
 $aside-width: 320px;
 
 

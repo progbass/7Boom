@@ -264,10 +264,12 @@ add_filter('the_content', 'filter_ptags_on_images');
  * Wraps Embedded content on a DIV element
  * @return String
  */
-add_filter('embed_oembed_html', 'my_embed_oembed_html', 99, 4);
-function my_embed_oembed_html($html, $url, $attr, $post_id) {
-  return '<div class="video_container">' . $html . '</div>';
+function tdd_oembed_filter($html, $url, $attr, $post_ID) {
+    $return = '<figure class="video_container">'.$html.'</figure>';
+    return $return;
 }
+add_filter( 'embed_oembed_html', 'tdd_oembed_filter', 10, 4 ) ; 
+add_filter( 'video_embed_html', 'tdd_oembed_filter' );
 
 /**
  * Wraps Images content on a DIV element
