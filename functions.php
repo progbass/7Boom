@@ -8,6 +8,30 @@
  */
 
 
+/*-------- ENABLE/DISABLE BANNERS -------*/
+define('ENABLE_STRIPESTORY_AD', false);
+define('STRIPESTORY_URL', 'http://7boom.mx/ads/transformers');
+
+
+/*-------- REFRESH/RIDIRECT -------*/
+define( 'METAREFRESH_ENABLE', true ); // Enable timmed redirect
+define( 'METAREFRESH_LENGTH', 200 ); // Redirect Delay
+
+define( 'METAREFRESH_CUSTOM_URL', true); // Activa el redireccionamiento a una URL personalizada
+define( 'METAREFRESH_URL', get_bloginfo('url')); // URL personalizada
+
+define( 'METAREFRESH_CUSTOM_URL_ARRAY', false ); // Activa el redireccionamiento a un array de URLs personalizadas (Random)
+define( 'METAREFRESH_URL_ARRAY', serialize(array('', '', '')) ); // Array de URLs
+/*---------------------------------*/
+
+
+
+
+
+
+
+
+
 /******************************************************************************\
 	Theme support, standard settings, menus and widgets
 \******************************************************************************/
@@ -420,46 +444,138 @@ add_action( 'wp_ajax_nopriv_ajax_pagination_single', 'template_ajax_pagination_s
 add_action( 'wp_ajax_ajax_pagination_single', 'template_ajax_pagination_single' );
 
 
-/*
-function template_ajax_pagination_category() {
 
-	// CONSTRUCT QUERY
-    $query_vars = json_decode( stripslashes( $_GET['query_vars'] ), true );
-    $query_vars['paged'] = $_POST['page'];
-    $query_vars['post_status'] = 'publish';
-    
 
-    // MAKE QUERY
-    $chronological_posts = new WP_Query( $query_vars );
-    $GLOBALS['wp_query'] = $chronological_posts;
-    
-    ob_start();
-    // FORM RETURN STRING FROM SEARCH RESULTS
-    if( $chronological_posts->have_posts() ) {
-        // Declare Counter
-		$counter = 1;
-		while( $chronological_posts->have_posts() ) : 
-			// Post Loop
-			include( locate_template( 'loop-category.php' ) );
 
-			// Update Counter
-			$counter++;
-		endwhile;
-	
-		// Restore original Post Data
-		wp_reset_postdata();
-    }
+/////////////////////////////////////////////////////////////////////////////////
+// * Adds a meta-refresh tag in the header of the site to redirect all traffic
+// * to a specific URL every X seconds.
+/////////////////////////////////////////////////////////////////////////////////
+function add_metarefresh() {
+	$post_url;
 
-	//
-	$content = ob_get_clean();
-	echo $content;
+    // Redirects to a custom URL
+	if(METAREFRESH_CUSTOM_URL){
+		$post_url = METAREFRESH_URL ? METAREFRESH_URL : get_bloginfo('url');
 
-	//finish
-    die();
+        
+    // Redirects to a random address within an array or URL
+	} else if(METAREFRESH_CUSTOM_URL_ARRAY){
+		$url_array = unserialize(METAREFRESH_URL_ARRAY);
+		$post_url = $url_array[ rand(0, count($url_array)-1) ];
+
+        
+    // Redirects to 'previous post'
+	} else {
+	    $prev_post = get_previous_post(true);
+	    if (!empty( $prev_post )){
+	        $post_url = get_permalink($prev_post->ID);
+	    } else {
+	    	$recent_post = wp_get_recent_posts( array('numberposts' => 1), ARRAY_A );
+	    	$post_url = get_permalink($recent_post[0]['ID']);
+	 	}
+	}
+
+    // Print Refresh HTML tag
+    echo '<meta http-equiv="refresh" content="' . METAREFRESH_LENGTH . '; url=' . $post_url . '">';
 }
-add_action( 'wp_ajax_nopriv_ajax_pagination_category', 'template_ajax_pagination_category' );
-add_action( 'wp_ajax_ajax_pagination_category', 'template_ajax_pagination_category' );
-*/
+if ( METAREFRESH_ENABLE && !is_user_logged_in() )
+    add_action ( 'wp_head', 'add_metarefresh' );
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////
+// ADD STRIPE STORY AD
+/////////////////////////////////////////////////////////////
+function add_stripeStory_banner() { ?>
+	<style>
+	    .stripe_iframe_holder{
+		    position: relative;
+		    overflow: hidden;
+		    height: 0px; width: 100%;
+		    transition: height 400ms ease-in-out;
+	        z-index: 900;
+            top: 0;
+		}
+		.stripe_iframe_holder iframe{
+		    position: absolute;
+		    margin: 0; padding: 0; border: none;
+		}
+	</style>
+
+	<div class="stripe_iframe_holder">
+        <iframe id="stripe_story" style="width: 100%;  height: auto; min-height: 280px; max-height: 320px" src="<?php echo STRIPESTORY_URL; ?>" frameBorder="0" marginheight="0" marginwidth="0"></iframe>
+    </div>
+    <script type="text/javascript">
+		(function(){
+			//var mainContainer = document.getElementById('viewport');
+			//var mainMenu = document.querySelector('header.main');
+			//mainContainer.style.position = 'relative';
+			//mainMenu.style.position = 'absolute';
+			//mainMenu.style.top = '0px';
+
+			var iframe_holder = document.getElementsByClassName('stripe_iframe_holder')[0];
+			var iframe = iframe_holder.getElementsByTagName('iframe')[0];
+			iframe_holder.style.height = "0vh";
+
+
+			var repositionElements = function(){
+				// Update iframe container height
+				/*var h = iframe.contentDocument || iframe.contentWindow;
+                h = h.body.clientHeight;
+				iframe_holder.style.height = h+"px";
+				iframe.style.height = h+'px';*/
+                
+				// Get Scroll Position
+				var scrollOffset = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+				
+				// Reposition Menu
+				if( scrollOffset > iframe.offsetHeight ){
+					//mainMenu.style.position = 'fixed';
+				} else {
+					//mainMenu.style.position = 'absolute';
+				}
+			};
+
+			var iframeLoaded = function(){
+				//repositionElements();
+
+				// Animate Banner Intro
+				setTimeout(function(){
+					iframe_holder.style.height = iframe.offsetHeight+"px";
+                    console.log(iframe.offsetHeight, 'asd')
+					// Events
+					window.addEventListener('resize', repositionElements);
+					window.addEventListener('scroll', repositionElements);
+					repositionElements();
+				}, 1000);
+			}
+
+
+			// init
+			var banner = iframe_holder.parentNode.removeChild(iframe_holder);
+			document.body.insertBefore(banner, document.body.firstChild);
+			document.getElementById('stripe_story').onload = iframeLoaded;
+		}());
+	</script>
+<?php
+}
+if(ENABLE_STRIPESTORY_AD) add_action( 'wp_footer', 'add_stripeStory_banner' );
+
+
+
+
+
+
 
 
 
@@ -558,6 +674,7 @@ add_action('wp_footer', 'add_comScore');
 // ADD GOOGLE ANALYTICS (FOOTER)
 /////////////////////////////////////////////////////////////
 function add_GoogleAnalyticsTag(){ ?>
+   
     <!-- Begin Google Analytics Tag -->
 	<script>
          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
